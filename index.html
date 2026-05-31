@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synclair — The Living World Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script defer data-domain="synclair.bio" src="https://plausible.io/js/pa-JRc2uNA7DMYh_tRs0gik8.js"></script>
+
+<style>
+/* ═══════════════════════════════════════════════
+   SYNCLAIR — Earth Portal
+   Inspired by: Sierra · Harvey · Apple · NCX
+   
+   TYPOGRAPHY RULES (Apple standard — non-negotiable):
+   Body:    17px min
+   Labels:  14px min  
+   H3:      24px min
+   H2:      36px min
+   H1:      56px min
+   Nav:     17px
+═══════════════════════════════════════════════ */
+
+:root {
+  /* Palette — earth, life, clarity */
+  --white:   #ffffff;
+  --bg:      #f9faf9;
+  --ink:     #111a12;
+  --ink2:    #2c3e2e;
+  --ink3:    #6a7e6c;
+  --border:  rgba(17,26,18,0.1);
+
+  /* Vertical accents */
+  --G:  #1a4a24;  --Gm: #2a8a48;  --Gb: #e6f4ec;
+  --B:  #0a2e4a;  --Bm: #1a7ab0;  --Bb: #e2eff8;
+  --N:  #3a2e0a;  --Nm: #a07820;  --Nb: #f5f0e0;
+  --T:  #1e3a0a;  --Tm: #5a8a20;  --Tb: #edf5e0;
+
+  --FD: 'Cormorant Garamond', Georgia, serif;
+  --FB: 'Jost', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--FB);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ═══ NAV — Sierra/Harvey style ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-in {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(2rem, 5vw, 4rem);
+  height: 64px;
+  max-width: 1280px; margin: 0 auto;
+}
+
+.nav-logo {
+  font-family: var(--FD);
+  font-size: 1.7rem; font-weight: 400;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex; align-items: center;
+  gap: 2.5rem; list-style: none;
+}
+
+.nav-links a {
+  font-size: 17px; font-weight: 400;
+  color: var(--ink2); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--ink) !important;
+  color: #fff !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.8 !important; }
+
+/* ═══ HERO — Apple scale + NCX warmth ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px clamp(2rem, 6vw, 5rem) 4rem;
+  position: relative;
+  background: var(--white);
+  overflow: visible;
+}
+
+/* Subtle earth-tone radial wash — like morning light */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 60%, rgba(42,138,72,0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 30%, rgba(90,138,32,0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 25% at 85% 25%, rgba(26,122,176,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--Gm);
+  margin-bottom: 2rem;
+  opacity: 0; animation: up 0.8s ease both 0.1s;
+}
+
+.hero-h1 {
+  font-family: var(--FD);
+  font-size: clamp(56px, 9vw, 120px);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: up 0.9s ease both 0.2s;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--Gm);
+}
+
+.hero-sub {
+  font-size: 21px; font-weight: 300;
+  color: var(--ink2); line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto 3.5rem;
+  opacity: 0; animation: up 0.8s ease both 0.35s;
+}
+
+/* ═══ VERTICALS — NCX warmth + Apple clarity ═══ */
+.verticals {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  max-width: 960px;
+  border-radius: 20px;
+  overflow: visible;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 40px rgba(17,26,18,0.06), 0 1px 4px rgba(17,26,18,0.04);
+  opacity: 0; animation: up 0.9s ease both 0.5s;
+}
+
+.v-card {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  padding: clamp(1.8rem, 3vw, 2.8rem) clamp(1.2rem, 2.5vw, 2rem);
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 1rem;
+  text-decoration: none;
+  border-right: 1px solid var(--border);
+  min-height: clamp(200px, 28vh, 280px);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: var(--white);
+  overflow: visible;
+}
+.v-card:last-child { border-right: none; }
+
+/* ═══ VERTICALS — animated scene cards ═══ */
+.verticals {
+  display: flex; gap: 0;
+  width: 100%; max-width: 960px;
+  border-radius: 20px; overflow: visible;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 40px rgba(17,26,18,0.06), 0 1px 4px rgba(17,26,18,0.04);
+  opacity: 0; animation: up 0.9s ease both 0.5s;
+}
+
+.v-card {
+  flex: 1; position: relative; cursor: pointer;
+  padding: clamp(1.8rem,3vw,2.5rem) clamp(1.2rem,2.5vw,1.8rem) clamp(1.5rem,2.5vw,2rem);
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 0.8rem;
+  text-decoration: none;
+  border-right: 1px solid var(--border);
+  overflow: visible;
+  background: var(--white);
+  min-height: clamp(280px, 36vh, 380px);
+}
+.v-card:last-child { border-right: none; }
+
+/* Top accent line */
+.v-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; opacity: 0; transition: opacity 0.4s;
+  z-index: 2;
+}
+.v-card[data-v="botanica"]::before { background: var(--Gm); }
+.v-card[data-v="marina"]::before   { background: var(--Bm); }
+.v-card[data-v="natura"]::before   { background: var(--Nm); }
+.v-card[data-v="terra"]::before    { background: var(--Tm); }
+.v-card:hover::before { opacity: 1; }
+
+/* Scene container — hidden by default, reveals on hover */
+.v-scene {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.v-card:hover .v-scene { opacity: 1; }
+.v-scene svg { width: 100%; height: 100%; }
+
+/* Content sits above scene */
+.v-icon, .v-name, .v-domain, .v-arrow, .v-live, .v-soon {
+  position: relative; z-index: 1;
+}
+
+/* Colour wash */
+.v-card[data-v="botanica"]:hover { background: var(--Gb); }
+.v-card[data-v="marina"]:hover   { background: var(--Bb); }
+.v-card[data-v="natura"]:hover   { background: var(--Nb); }
+.v-card[data-v="terra"]:hover    { background: var(--Tb); }
+
+/* Icon */
+.v-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+  transition: transform 0.35s;
+}
+.v-card[data-v="botanica"] .v-icon { background: var(--Gb); }
+.v-card[data-v="marina"]   .v-icon { background: var(--Bb); }
+.v-card[data-v="natura"]   .v-icon { background: var(--Nb); }
+.v-card[data-v="terra"]    .v-icon { background: var(--Tb); }
+.v-card:hover .v-icon { transform: scale(1.1) rotate(-3deg); }
+
+.v-name {
+  font-family: var(--FD); font-size: clamp(24px,3vw,34px);
+  font-weight: 400; line-height: 1; transition: color 0.3s; color: var(--ink);
+}
+.v-card[data-v="botanica"]:hover .v-name { color: var(--G); }
+.v-card[data-v="marina"]:hover   .v-name { color: var(--B); }
+.v-card[data-v="natura"]:hover   .v-name { color: var(--N); }
+.v-card[data-v="terra"]:hover    .v-name { color: var(--T); }
+
+.v-domain {
+  font-size: 14px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink3); transition: color 0.3s; margin-top: -0.4rem;
+}
+.v-card[data-v="botanica"]:hover .v-domain { color: var(--Gm); }
+.v-card[data-v="marina"]:hover   .v-domain { color: var(--Bm); }
+.v-card[data-v="natura"]:hover   .v-domain { color: var(--Nm); }
+.v-card[data-v="terra"]:hover    .v-domain { color: var(--Tm); }
+
+.v-arrow {
+  margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.v-card:hover .v-arrow { opacity: 1; transform: translateX(0); }
+.v-card[data-v="botanica"] .v-arrow { color: var(--Gm); }
+.v-card[data-v="marina"]   .v-arrow { color: var(--Bm); }
+.v-card[data-v="natura"]   .v-arrow { color: var(--Nm); }
+.v-card[data-v="terra"]    .v-arrow { color: var(--Tm); }
+
+/* Live / soon badge */
+.v-live {
+  position: absolute; top: 1.2rem; right: 1.2rem; z-index: 3;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border-radius: 999px;
+  background: rgba(42,138,72,0.1); color: var(--Gm); border: 1px solid rgba(42,138,72,0.2);
+}
+.v-soon {
+  position: absolute; top: 1.2rem; right: 1.2rem; z-index: 3;
+  font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--ink3);
+}
+
+/* ── BOTANICA: Orchid blooming ── */
+@keyframes orchid-petal-1 { 0%,100%{transform-origin:50% 100%;transform:rotate(-40deg) scale(0.3);opacity:0} 20%{opacity:1} 60%,80%{transform:rotate(-40deg) scale(1);opacity:0.85} }
+@keyframes orchid-petal-2 { 0%,100%{transform-origin:50% 100%;transform:rotate(-15deg) scale(0.3);opacity:0} 25%{opacity:1} 65%,80%{transform:rotate(-15deg) scale(1);opacity:0.85} }
+@keyframes orchid-petal-3 { 0%,100%{transform-origin:50% 100%;transform:rotate(15deg) scale(0.3);opacity:0}  30%{opacity:1} 70%,80%{transform:rotate(15deg) scale(1);opacity:0.85} }
+@keyframes orchid-petal-4 { 0%,100%{transform-origin:50% 100%;transform:rotate(40deg) scale(0.3);opacity:0}  35%{opacity:1} 75%,80%{transform:rotate(40deg) scale(1);opacity:0.85} }
+@keyframes orchid-center   { 0%{r:0;opacity:0} 50%{opacity:1} 70%,100%{r:10;opacity:0.9} }
+@keyframes orchid-stem     { 0%{stroke-dashoffset:80} 60%{stroke-dashoffset:0} 100%{stroke-dashoffset:0} }
+@keyframes orchid-leaf     { 0%{transform:scaleY(0) rotate(-20deg);opacity:0} 40%{opacity:0.7} 70%,100%{transform:scaleY(1) rotate(-20deg);opacity:0.7} }
+
+.v-card[data-v="botanica"]:hover .orch-p1 { animation: orchid-petal-1 3s ease-in-out infinite; }
+.v-card[data-v="botanica"]:hover .orch-p2 { animation: orchid-petal-2 3s ease-in-out infinite 0.1s; }
+.v-card[data-v="botanica"]:hover .orch-p3 { animation: orchid-petal-3 3s ease-in-out infinite 0.2s; }
+.v-card[data-v="botanica"]:hover .orch-p4 { animation: orchid-petal-4 3s ease-in-out infinite 0.3s; }
+.v-card[data-v="botanica"]:hover .orch-c  { animation: orchid-center  3s ease-in-out infinite 0.4s; }
+.v-card[data-v="botanica"]:hover .orch-s  { animation: orchid-stem    3s ease-in-out infinite; stroke-dasharray: 80; }
+.v-card[data-v="botanica"]:hover .orch-l  { animation: orchid-leaf    3s ease-in-out infinite 0.2s; }
+
+/* ── MARINA: Whale breach ── */
+@keyframes whale-rise  { 0%{transform:translateY(60px) rotate(-15deg);opacity:0} 15%{opacity:1} 45%{transform:translateY(-20px) rotate(-5deg);opacity:1} 65%{transform:translateY(-30px) rotate(5deg);opacity:1} 80%,100%{transform:translateY(80px) rotate(20deg);opacity:0} }
+@keyframes splash-l    { 0%,40%{transform:scale(0);opacity:0} 55%{transform:scale(1);opacity:0.7} 75%,100%{transform:scale(1.4) translateX(-8px);opacity:0} }
+@keyframes splash-r    { 0%,40%{transform:scale(0);opacity:0} 55%{transform:scale(1);opacity:0.7} 75%,100%{transform:scale(1.4) translateX(8px);opacity:0} }
+@keyframes waves-bob   { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-6px)} }
+
+.v-card[data-v="marina"]:hover .whale-body { animation: whale-rise 3.5s cubic-bezier(0.25,0.46,0.45,0.94) infinite; }
+.v-card[data-v="marina"]:hover .splash-l   { animation: splash-l  3.5s ease infinite; }
+.v-card[data-v="marina"]:hover .splash-r   { animation: splash-r  3.5s ease infinite 0.1s; }
+.v-card[data-v="marina"]:hover .wave-line  { animation: waves-bob 2s ease-in-out infinite; }
+
+/* ── NATURA: Butterfly flight ── */
+@keyframes bf-fly      { 0%,100%{transform:translate(0,0)} 50%{transform:translate(0,0)} }
+@keyframes bf-wing-l   { 0%,100%{transform-origin:right center;transform:scaleX(1)} 50%{transform-origin:right center;transform:scaleX(0.2)} }
+@keyframes bf-wing-r   { 0%,100%{transform-origin:left center;transform:scaleX(1)} 50%{transform-origin:left center;transform:scaleX(0.2)} }
+
+.v-card[data-v="natura"]:hover .bf-body   { animation: bf-fly    3s ease-in-out infinite; }
+.v-card[data-v="natura"]:hover .bf-wing-l { animation: bf-wing-l 0.4s ease-in-out infinite; }
+.v-card[data-v="natura"]:hover .bf-wing-r { animation: bf-wing-r 0.4s ease-in-out infinite; }
+
+/* ── TERRA: Seedling sprouting ── */
+@keyframes seed-crack  { 0%{transform:scale(1)} 20%{transform:scale(1.1) rotate(-5deg)} 40%{transform:scale(0.8) rotate(5deg)} 60%,100%{transform:scale(0) rotate(10deg);opacity:0} }
+@keyframes stem-grow   { 0%,20%{stroke-dashoffset:100;opacity:0} 25%{opacity:1} 80%,100%{stroke-dashoffset:0} }
+@keyframes leaf-l-open { 0%,25%{transform-origin:bottom right;transform:scale(0) rotate(30deg);opacity:0} 30%{opacity:1} 70%,100%{transform:scale(1) rotate(0deg);opacity:0.85} }
+@keyframes leaf-r-open { 0%,35%{transform-origin:bottom left;transform:scale(0) rotate(-30deg);opacity:0} 40%{opacity:1} 75%,100%{transform:scale(1) rotate(0deg);opacity:0.85} }
+@keyframes root-grow   { 0%{stroke-dashoffset:60;opacity:0} 15%{opacity:0.5} 50%,100%{stroke-dashoffset:0;opacity:0.4} }
+
+.v-card[data-v="terra"]:hover .seed      { animation: seed-crack  3.5s ease-in-out infinite; }
+.v-card[data-v="terra"]:hover .stem      { animation: stem-grow   3.5s ease-in-out infinite; stroke-dasharray:100; }
+.v-card[data-v="terra"]:hover .leaf-l    { animation: leaf-l-open 3.5s ease-in-out infinite; }
+.v-card[data-v="terra"]:hover .leaf-r    { animation: leaf-r-open 3.5s ease-in-out infinite; }
+.v-card[data-v="terra"]:hover .root      { animation: root-grow   3.5s ease-in-out infinite; stroke-dasharray:60; }
+
+/* Top accent line */
+.v-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; opacity: 0; transition: opacity 0.4s;
+}
+.v-card[data-v="botanica"]::before { background: var(--Gm); }
+.v-card[data-v="marina"]::before   { background: var(--Bm); }
+.v-card[data-v="natura"]::before   { background: var(--Nm); }
+.v-card[data-v="terra"]::before    { background: var(--Tm); }
+.v-card:hover::before { opacity: 1; }
+
+/* Icon */
+.v-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  transition: transform 0.35s;
+  flex-shrink: 0;
+}
+.v-card[data-v="botanica"] .v-icon { background: var(--Gb); }
+.v-card[data-v="marina"]   .v-icon { background: var(--Bb); }
+.v-card[data-v="natura"]   .v-icon { background: var(--Nb); }
+.v-card[data-v="terra"]    .v-icon { background: var(--Tb); }
+.v-card[data-v="botanica"]:hover .v-icon { animation: syn-icon-leaf    0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.v-card[data-v="marina"]:hover   .v-icon { animation: syn-icon-wave    0.6s ease forwards; }
+.v-card[data-v="natura"]:hover   .v-icon { animation: syn-icon-flutter 0.65s ease forwards; }
+.v-card[data-v="terra"]:hover    .v-icon { animation: syn-icon-sprout  0.55s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+.v-name {
+  font-family: var(--FD);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 400; line-height: 1;
+  transition: color 0.3s;
+  color: var(--ink);
+}
+.v-card[data-v="botanica"]:hover .v-name { color: var(--G); }
+.v-card[data-v="marina"]:hover   .v-name { color: var(--B); }
+.v-card[data-v="natura"]:hover   .v-name { color: var(--N); }
+.v-card[data-v="terra"]:hover    .v-name { color: var(--T); }
+
+.v-domain {
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink3); transition: color 0.3s;
+  margin-top: -0.4rem;
+}
+.v-card[data-v="botanica"]:hover .v-domain { color: var(--Gm); }
+.v-card[data-v="marina"]:hover   .v-domain { color: var(--Bm); }
+.v-card[data-v="natura"]:hover   .v-domain { color: var(--Nm); }
+.v-card[data-v="terra"]:hover    .v-domain { color: var(--Tm); }
+
+.v-arrow {
+  margin-top: auto;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.v-card:hover .v-arrow { opacity: 1; transform: translateX(0); }
+.v-card[data-v="botanica"] .v-arrow { color: var(--Gm); }
+.v-card[data-v="marina"]   .v-arrow { color: var(--Bm); }
+.v-card[data-v="natura"]   .v-arrow { color: var(--Nm); }
+.v-card[data-v="terra"]    .v-arrow { color: var(--Tm); }
+
+.v-card[data-v="natura"]:hover .natura-scene { opacity: 0.85 !important; }
+.v-card[data-v="natura"]:hover .natura-scene .bf-wing-l { animation: bf-wing-l 0.4s ease-in-out infinite; }
+.v-card[data-v="natura"]:hover .natura-scene .bf-wing-r { animation: bf-wing-r 0.4s ease-in-out infinite; }
+.v-card[data-v="natura"]:hover .natura-scene .bf-body   { animation: bf-fly 3s ease-in-out infinite; }
+
+/* Natura butterfly — in flow at bottom of card */
+.bf-svg {
+  width: 100%; height: auto;
+  display: block;
+  margin-top: auto;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.v-card[data-v="natura"]:hover .bf-svg { opacity: 0.85; }
+.v-card[data-v="natura"]:hover .bf-svg .bf-wing-l { animation: bf-wing-l 0.4s ease-in-out infinite; }
+.v-card[data-v="natura"]:hover .bf-svg .bf-wing-r { animation: bf-wing-r 0.4s ease-in-out infinite; }
+
+/* Live badge */
+.v-live {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(42,138,72,0.1);
+  color: var(--Gm); border: 1px solid rgba(42,138,72,0.2);
+}
+.v-soon {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  font-size: 11px; font-weight: 400; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border); color: var(--ink3);
+}
+
+/* ═══ MISSION — NCX / full-width statement ═══ */
+.mission {
+  padding: clamp(6rem, 12vh, 10rem) clamp(2rem, 6vw, 5rem);
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(42,138,72,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.mission-in { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+
+.mission-label {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(45,232,150,0.8);
+  margin-bottom: 2rem; display: block;
+}
+
+.mission-h2 {
+  font-family: var(--FD);
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 300; line-height: 1.1;
+  color: #fff; margin-bottom: 2rem;
+}
+.mission-h2 em { font-style: italic; color: #2de896; }
+
+.mission-body {
+  font-size: 21px; font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  max-width: 680px; margin: 0 auto 4rem;
+  line-height: 1.7;
+}
+
+/* Stats row */
+.mission-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; overflow: hidden;
+  max-width: 860px; margin: 0 auto;
+}
+
+.m-stat {
+  padding: 3rem 2rem; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.m-stat:last-child { border-right: none; }
+
+.m-num {
+  font-family: var(--FD);
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 300; color: #2de896;
+  line-height: 1; margin-bottom: 0.6rem;
+}
+.m-label { font-size: 19px; font-weight: 400; color: #fff; margin-bottom: 0.25rem; }
+.m-sub   { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+/* ═══ FEATURES — Sierra grid ═══ */
+.features {
+  padding: clamp(6rem, 12vh, 10rem) clamp(2rem, 6vw, 5rem);
+  background: var(--bg);
+  max-width: 1280px; margin: 0 auto;
+}
+
+.feat-label {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--Gm);
+  margin-bottom: 1.5rem; display: block;
+}
+
+.feat-h2 {
+  font-family: var(--FD);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--ink); margin-bottom: 1rem;
+}
+.feat-h2 em { font-style: italic; color: var(--Gm); }
+
+.feat-sub {
+  font-size: 19px; font-weight: 300; color: var(--ink2);
+  max-width: 560px; line-height: 1.65; margin-bottom: 4rem;
+}
+
+.feat-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.feat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px; padding: 2.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(17,26,18,0.08);
+}
+
+.feat-n {
+  font-family: var(--FD);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 300; color: var(--Gm);
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.feat-n-label {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 1.5rem;
+}
+.feat-h3 {
+  font-family: var(--FD); font-size: 28px; font-weight: 400;
+  color: var(--ink); line-height: 1.15; margin-bottom: 0.8rem;
+}
+.feat-p {
+  font-size: 17px; font-weight: 300; color: var(--ink2); line-height: 1.65;
+}
+
+/* ═══ CTA — Harvey minimal ═══ */
+.cta-section {
+  padding: clamp(6rem, 12vh, 10rem) clamp(2rem, 6vw, 5rem);
+  text-align: center;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+.cta-h2 {
+  font-family: var(--FD);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--ink); margin-bottom: 1.4rem;
+  max-width: 700px; margin-left: auto; margin-right: auto;
+}
+.cta-h2 em { font-style: italic; color: var(--Gm); }
+
+.cta-body {
+  font-size: 21px; font-weight: 300; color: var(--ink2);
+  max-width: 520px; margin: 0 auto 3rem; line-height: 1.65;
+}
+
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+.btn-p {
+  background: var(--ink); color: #fff;
+  padding: 1rem 2.2rem; border-radius: 999px;
+  font-size: 17px; font-weight: 500; text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s; display: inline-block;
+}
+.btn-p:hover { opacity: 0.85; transform: translateY(-2px); }
+
+.btn-g {
+  border: 1.5px solid var(--border); color: var(--ink2);
+  padding: 1rem 2.2rem; border-radius: 999px;
+  font-size: 17px; font-weight: 400; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s; display: inline-block;
+}
+.btn-g:hover { border-color: var(--ink); color: var(--ink); }
+
+.cta-note { font-size: 15px; color: var(--ink3); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  padding: 3rem clamp(2rem, 6vw, 5rem);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+.foot-in {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap;
+  gap: 1rem; max-width: 1280px; margin: 0 auto;
+}
+.foot-logo { font-family: var(--FD); font-size: 1.4rem; color: var(--ink2); font-weight: 400; }
+.foot-links { display: flex; gap: 2.5rem; list-style: none; }
+.foot-links a {
+  font-size: 15px; color: var(--ink3); text-decoration: none;
+  transition: color 0.2s;
+}
+.foot-links a:hover { color: var(--ink); }
+.foot-copy { font-size: 15px; color: var(--ink3); }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes up {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET (max 860px)
+═══════════════════════════════════════ */
+@media (max-width: 860px) {
+
+  /* Nav */
+  .nav-in { padding: 0 1.5rem; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+
+  /* Hero */
+  .hero { padding: 90px 1.5rem 3rem; }
+  .hero-h1 { font-size: clamp(44px, 8vw, 72px); }
+  .hero-sub { font-size: 19px; }
+
+  /* Verticals */
+  .verticals { flex-direction: column; border-radius: 14px; overflow: visible; }
+  .v-card { border-right: none; border-bottom: 1px solid var(--border); min-height: 140px; }
+  .v-card:last-child { border-bottom: none; }
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .section-note { text-align: left; max-width: 100%; }
+
+  /* Mission */
+  .mission-stats { grid-template-columns: 1fr; }
+  .m-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .m-stat:last-child { border-bottom: none; }
+  .mission-h2 { font-size: clamp(28px, 5vw, 48px); }
+
+  /* Features */
+  .feat-grid { grid-template-columns: 1fr; }
+
+  /* Demo */
+  #demoTabs { flex-wrap: wrap; }
+  .dtab { flex: 1 1 45%; border-right: 1px solid var(--border); }
+  .dtab:nth-child(2) { border-right: none; }
+  .dtab:nth-child(3) { border-top: 1px solid var(--border); }
+  .dtab:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+  #dp1 > div:first-of-type { grid-template-columns: 1fr 1fr !important; }
+  .import-stats, #dp1 .import-stats { grid-template-columns: 1fr !important; }
+  #aiKpis { grid-template-columns: 1fr 1fr !important; }
+  .report-cols, .rcols { grid-template-columns: 1fr !important; }
+  .report-kpis, .rkpis { grid-template-columns: 1fr 1fr !important; }
+  .r-impact-n, .rin { font-size: 48px !important; }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE (max 600px) — full treatment
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Nav — minimal on mobile */
+  .nav-in { padding: 0 1.25rem; height: 56px; }
+  .nav-logo { font-size: 1.4rem; }
+  .nav-links { display: none; }
+  #lang-btn { font-size: 13px; padding: 0.35rem 0.8rem; }
+
+  /* Hero */
+  .hero {
+    padding: 80px 1.25rem 2.5rem;
+    min-height: auto;
+  }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.18em; margin-bottom: 1.2rem; }
+  .hero-h1 { font-size: clamp(40px, 11vw, 56px); line-height: 1.05; margin-bottom: 1.2rem; }
+  .hero-sub { font-size: 17px; margin-bottom: 2rem; }
+  .hero-btns { flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+  .hero-btns .btn-p, .hero-btns .btn-g { text-align: center; padding: 0.9rem 1.8rem; }
+  .hero-pills { gap: 1rem; }
+  .pill { font-size: 14px; }
+
+  /* Stat boxes */
+  .hero-right { grid-template-columns: 1fr !important; gap: 0.9rem; }
+  .stat-box:first-child { grid-column: span 1 !important; }
+  .stat-box { padding: 1.5rem; }
+  .stat-n { font-size: 36px; }
+  .stat-box:first-child .stat-n { font-size: 42px; }
+
+  /* Verticals section */
+  .verticals-section { padding: 3rem 1.25rem; }
+  .section-h2 { font-size: clamp(30px, 8vw, 44px); }
+  .v-card { padding: 1.5rem 1.25rem; min-height: 120px; }
+  .v-name { font-size: clamp(22px, 6vw, 30px); }
+  .v-domain { font-size: 13px; }
+  .v-icon { width: 44px; height: 44px; font-size: 18px; border-radius: 10px; }
+  .v-scene { display: none; } /* hide scenes on mobile — performance */
+
+  /* Mission */
+  .mission { padding: 3rem 1.25rem; }
+  .mission-h2 { font-size: clamp(26px, 7vw, 40px); }
+  .mission-body { font-size: 17px; }
+  .m-num { font-size: clamp(44px, 12vw, 64px); }
+  .m-label { font-size: 17px; }
+  .m-sub { font-size: 14px; }
+
+  /* Features */
+  .features { padding: 3rem 1.25rem; }
+  .feat-h2 { font-size: clamp(28px, 7vw, 44px); }
+  .feat-sub { font-size: 17px; margin-bottom: 2rem; }
+  .feat-card { padding: 1.8rem 1.5rem; }
+  .feat-n { font-size: clamp(28px, 7vw, 40px); }
+  .feat-h3 { font-size: 22px; }
+  .feat-p { font-size: 15px; }
+
+  /* Demo section */
+  #demo .feat-h2 { font-size: clamp(28px, 7vw, 44px); }
+  #demo .feat-sub { font-size: 17px; }
+  #demoTabs { flex-direction: column; border-radius: 10px; }
+  .dtab { border-right: none !important; border-bottom: 1px solid var(--border); border-top: none !important; flex: 1 1 100%; }
+  .dtab:last-child { border-bottom: none; }
+  #dp1 > div:first-of-type { grid-template-columns: 1fr !important; }
+  #dp1 .sys-grid, .sys-grid { grid-template-columns: 1fr 1fr !important; }
+  .import-box, .ibox { padding: 1.5rem; }
+  .imp-n, .ibn { font-size: 32px; }
+  #aiKpis { grid-template-columns: 1fr 1fr !important; }
+  .ai-kpi-n, .akn { font-size: 28px; }
+  .report-kpis, .rkpis { grid-template-columns: 1fr 1fr !important; }
+  .r-kpi-n, .rkn { font-size: 28px; }
+  .report-impact, .ri { padding: 1.8rem; }
+  .r-impact-n, .rin { font-size: 40px !important; }
+
+  /* CTA */
+  .cta-section { padding: 3rem 1.25rem; }
+  .cta-h2 { font-size: clamp(28px, 7vw, 44px); }
+  .cta-body { font-size: 17px; margin-bottom: 2rem; }
+  .cta-btns { flex-direction: column; align-items: center; }
+  .cta-btns .btn-p { width: 100%; text-align: center; }
+
+  /* Footer */
+  .site-foot, footer { padding: 2rem 1.25rem; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .foot-links { flex-wrap: wrap; gap: 1rem; }
+  .foot-links a { font-size: 14px; }
+  .foot-copy { font-size: 13px; }
+
+  /* Botanica panel nav */
+  #botanica-panel nav > div { padding: 0 1.25rem !important; }
+  #botanica-panel nav .nav-logo { font-size: 1.3rem; }
+  #botanica-panel nav a[href="mailto:hello@synclair.bio"] { display: none; }
+
+  /* Botanica panel hero */
+  #botanica-panel > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 2rem 1.25rem 2.5rem !important;
+  }
+  #botanica-panel h1 { font-size: clamp(36px, 9vw, 56px) !important; }
+  #botanica-panel p[style*="font-size:21px"] { font-size: 17px !important; }
+  #botanica-panel .btns, #botanica-panel div[style*="display:flex;gap:1rem"] { flex-direction: column; }
+
+  /* Botanica panel stat cards */
+  #botanica-panel div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Botanica panel demo */
+  #b-demo { padding: 2.5rem 1.25rem !important; }
+  #botanica-panel .b-tab { font-size: 13px; padding: 0.9rem 0.5rem; }
+  #botanica-panel .sys-grid { grid-template-columns: 1fr 1fr !important; }
+  #botanica-panel .rcols, #botanica-panel div[style*="grid-template-columns:1fr 1fr;gap:2rem"] {
+    grid-template-columns: 1fr !important;
+  }
+  #botanica-panel .rkpis, #botanica-panel div[style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  #botanica-panel .rin, #botanica-panel div[style*="font-size:64px"] { font-size: 40px !important; }
+}
+
+/* ── Mobile nav components ── */
+.mobile-nav-right { display: none; align-items: center; gap: 0.75rem; }
+.lang-btn-mob { background:none; border:1.5px solid var(--border); border-radius:999px; padding:0.35rem 0.8rem; font-family:var(--FB); font-size:13px; font-weight:500; color:var(--ink2); cursor:pointer; }
+.ham-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; flex-direction:column; gap:5px; }
+.hline { display:block; width:22px; height:2px; background:var(--ink); border-radius:2px; transition:transform 0.3s,opacity 0.3s; }
+.mob-menu { display:none; flex-direction:column; background:#fff; border-top:1px solid var(--border); padding:0 1.25rem 1.5rem; }
+.mob-menu.open { display:flex; }
+.mob-link { font-size:19px; font-weight:400; color:var(--ink); text-decoration:none; padding:1rem 0; border-bottom:1px solid var(--border); display:block; }
+.mob-cta { font-size:17px; font-weight:500; color:#fff; background:var(--G); text-decoration:none; padding:1rem 1.5rem; border-radius:999px; display:inline-block; margin-top:1.25rem; text-align:center; }
+
+@media(max-width:860px) {
+  /* Hero — stack on tablet */
+  .hero { grid-template-columns: 1fr !important; min-height: auto; }
+  .hero-right { max-width: 100%; }
+}
+
+@media(max-width:600px) {
+  .nav-links { display:none !important; }
+  .mobile-nav-right { display:flex; }
+
+  /* Hero */
+  .hero { grid-template-columns: 1fr !important; padding: 80px 1.25rem 2.5rem !important; }
+  .hero-right { grid-template-columns: 1fr 1fr !important; }
+  .stat-box:first-child { grid-column: span 2 !important; }
+
+  /* Coming soon modal */
+  #coming-soon-overlay > div { padding: 2rem 1.5rem !important; }
+  #cs-title { font-size: 28px !important; }
+
+  /* Botanica panel hero — stack */
+  #botanica-panel .b-hero-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <a href="#" class="nav-logo">Synclair</a>
+    <!-- Desktop links -->
+    <ul class="nav-links">
+      <li><a href="#features" data-i18n="nav_platform">Platform</a></li>
+      <li><a href="#mission" data-i18n="nav_mission">Mission</a></li>
+      <li><a href="#features" data-i18n="nav_features">Features</a></li>
+      <li><a href="mailto:hello@synclair.bio" class="nav-cta" data-i18n="nav_cta">Get Access</a></li>
+      <li><button onclick="switchLang()" id="lang-btn" style="background:none;border:1.5px solid var(--border);border-radius:999px;padding:0.4rem 1rem;font-family:var(--FB);font-size:14px;font-weight:500;color:var(--ink2);cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='var(--G)';this.style.color='var(--G)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink2)'">DE</button></li>
+    </ul>
+    <!-- Mobile right controls -->
+    <div class="mobile-nav-right">
+      <button onclick="switchLang()" id="lang-btn-mobile" class="lang-btn-mob">DE</button>
+      <button id="hamburger" onclick="toggleMenu()" aria-label="Menu" class="ham-btn">
+        <span class="hline"></span>
+        <span class="hline"></span>
+        <span class="hline" style="width:14px;"></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile dropdown -->
+  <div id="mobile-menu" class="mob-menu">
+    <a href="#features" onclick="toggleMenu()" data-i18n-mob="nav_platform" class="mob-link">Platform</a>
+    <a href="#mission"   onclick="toggleMenu()" data-i18n-mob="nav_mission"  class="mob-link">Mission</a>
+    <a href="#features"  onclick="toggleMenu()" data-i18n-mob="nav_features" class="mob-link">Features</a>
+    <a href="#" onclick="openBotanica();toggleMenu();" class="mob-link" style="color:var(--Gm);">Botanica →</a>
+    <a href="mailto:hello@synclair.bio" class="mob-cta" data-i18n-mob="nav_cta">Get Access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-eyebrow" data-i18n="hero_eyebrow">The Living World Platform</p>
+  <h1 class="hero-h1">
+    Intelligence<br>
+    for <em>life on Earth.</em>
+  </h1>
+  <p class="hero-sub">
+    AI-native tools for the institutions that protect our planet —
+    botanical gardens, marine institutes, natural history museums, and gene banks.
+  </p>
+
+  <div class="verticals" id="verticals">
+
+    <!-- BOTANICA — Orchid blooming -->
+    <a class="v-card" data-v="botanica" href="#" onclick="openBotanica(); return false;">
+      <span class="v-live">Live Now</span>
+      <!-- Scene: orchid -->
+      <div class="v-scene">
+        <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.55">
+          <!-- Stem -->
+          <path class="orch-s" d="M100 240 Q98 200 100 160 Q102 130 100 100" stroke="#2a8a48" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Leaves -->
+          <path class="orch-l" d="M100 200 C80 190 55 185 42 168 C58 155 80 162 96 178 Z" fill="#3a9a58" transform-origin="96px 178px"/>
+          <path class="orch-l" d="M102 185 C122 175 147 170 160 153 C144 140 122 147 106 163 Z" fill="#3a9a58" transform-origin="106px 163px" style="animation-delay:0.3s"/>
+          <!-- Petals -->
+          <ellipse class="orch-p1" cx="100" cy="95" rx="20" ry="38" fill="#d4f0e4" transform-origin="100px 133px"/>
+          <ellipse class="orch-p2" cx="100" cy="95" rx="20" ry="38" fill="#c8e8dc" transform-origin="100px 133px"/>
+          <ellipse class="orch-p3" cx="100" cy="95" rx="20" ry="38" fill="#d4f0e4" transform-origin="100px 133px"/>
+          <ellipse class="orch-p4" cx="100" cy="95" rx="20" ry="38" fill="#c8e8dc" transform-origin="100px 133px"/>
+          <!-- Lip petal -->
+          <ellipse cx="100" cy="112" rx="12" ry="18" fill="#f0d8f0" opacity="0.6"/>
+          <!-- Center -->
+          <circle class="orch-c" cx="100" cy="105" r="10" fill="#f5e870"/>
+          <circle cx="100" cy="105" r="5" fill="#e0c840" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="v-icon">🌿</div>
+      <div class="v-name">Botanica</div>
+      <div class="v-domain">Botanical Gardens</div>
+      <div class="v-arrow">
+        Enter
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- MARINA — Whale breach -->
+    <a class="v-card" data-v="marina" href="#" onclick="showComingSoon('Marina'); return false;">
+      <span class="v-soon">Coming soon</span>
+      <!-- Scene: whale -->
+      <div class="v-scene">
+        <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.5">
+          <!-- Ocean waves -->
+          <g class="wave-line">
+            <path d="M10 195 Q35 182 60 195 Q85 208 110 195 Q135 182 160 195 Q185 208 200 195" stroke="#1a7ab0" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M0 208 Q30 198 55 208 Q80 218 110 208 Q140 198 170 208 Q190 218 200 208" stroke="#1a7ab0" stroke-width="1.5" fill="none" opacity="0.4"/>
+          </g>
+          <!-- Whale body -->
+          <g class="whale-body">
+            <!-- Main body -->
+            <path d="M80 170 Q100 130 125 140 Q148 150 155 165 Q145 175 130 172 Q115 182 95 178 Z" fill="#1a4a7a"/>
+            <!-- Belly -->
+            <path d="M85 172 Q105 165 130 168 Q125 176 110 176 Q95 178 85 172 Z" fill="#2a6aaa" opacity="0.6"/>
+            <!-- Fluke -->
+            <path d="M150 165 Q165 155 175 162 Q168 170 155 165 Z" fill="#1a4a7a"/>
+            <path d="M150 165 Q162 172 170 168 Q165 175 155 168 Z" fill="#1a4a7a"/>
+            <!-- Pectoral fin -->
+            <path d="M105 158 Q118 148 128 153 Q122 162 108 162 Z" fill="#1a3a6a"/>
+            <!-- Eye -->
+            <circle cx="92" cy="161" r="3" fill="#ffffff" opacity="0.9"/>
+            <circle cx="93" cy="161" r="1.5" fill="#0a1a2a"/>
+          </g>
+          <!-- Splash -->
+          <path class="splash-l" d="M85 190 Q75 170 68 158 Q72 165 80 178" stroke="#4ab0e8" stroke-width="2" fill="none" stroke-linecap="round" transform-origin="80px 178px"/>
+          <path class="splash-r" d="M135 188 Q148 168 155 156 Q150 163 142 176" stroke="#4ab0e8" stroke-width="2" fill="none" stroke-linecap="round" transform-origin="142px 176px"/>
+          <circle class="splash-l" cx="70" cy="155" r="4" fill="#6ac8f0" opacity="0.7" transform-origin="70px 155px"/>
+          <circle class="splash-r" cx="158" cy="152" r="3" fill="#6ac8f0" opacity="0.7" transform-origin="158px 152px"/>
+          <circle class="splash-l" cx="60" cy="165" r="2.5" fill="#4ab0e8" opacity="0.6" transform-origin="60px 165px"/>
+        </svg>
+      </div>
+      <div class="v-icon">🌊</div>
+      <div class="v-name">Marina</div>
+      <div class="v-domain">Marine Institutes</div>
+      <div class="v-arrow">
+        Explore
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- NATURA — Fossil specimen emerging -->
+    <a class="v-card" data-v="natura" href="#" onclick="showComingSoon('Natura'); return false;">
+      <span class="v-soon">Coming soon</span>
+      <div class="v-scene">
+        <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.45;">
+          <!-- Ammonite fossil — top centre -->
+          <g transform="translate(100,90)">
+            <circle cx="0" cy="0" r="52" stroke="#a07820" stroke-width="1.5" fill="none"/>
+            <circle cx="0" cy="0" r="42" stroke="#a07820" stroke-width="1.2" fill="#f5f0e0" opacity="0.4"/>
+            <circle cx="0" cy="0" r="32" stroke="#a07820" stroke-width="1" fill="none"/>
+            <circle cx="0" cy="0" r="22" stroke="#b08830" stroke-width="1" fill="none"/>
+            <circle cx="0" cy="0" r="13" stroke="#a07820" stroke-width="1" fill="none"/>
+            <circle cx="0" cy="0" r="6"  fill="#c09840" opacity="0.6"/>
+            <!-- Spiral lines -->
+            <path d="M0 -52 Q26 -26 26 0 Q26 26 0 26 Q-14 26 -22 14" stroke="#a07820" stroke-width="1" fill="none"/>
+            <path d="M0 -42 Q21 -21 21 0 Q21 21 0 21 Q-10 21 -17 12" stroke="#a07820" stroke-width="0.8" fill="none"/>
+            <path d="M0 -32 Q16 -16 16 0 Q16 16 0 16" stroke="#a07820" stroke-width="0.7" fill="none"/>
+            <!-- Chamber lines radiating -->
+            <line x1="0" y1="-52" x2="0" y2="-6"  stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+            <line x1="37" y1="-37" x2="9" y2="-9"  stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+            <line x1="52" y1="0"   x2="6" y2="0"   stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+            <line x1="37" y1="37"  x2="9" y2="9"   stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+            <line x1="-37" y1="-37" x2="-9" y2="-9" stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+            <line x1="-52" y1="0"  x2="-6" y2="0"  stroke="#b08830" stroke-width="0.6" opacity="0.5"/>
+          </g>
+          <!-- Pin — museum specimen style -->
+          <line x1="100" y1="38" x2="100" y2="20" stroke="#5a3a10" stroke-width="1.5"/>
+          <circle cx="100" cy="18" r="3" fill="#8a5a20"/>
+          <!-- Label tag -->
+          <rect x="62" y="158" width="76" height="32" rx="3" fill="#faf6e8" stroke="#c0a840" stroke-width="0.8"/>
+          <line x1="62" y1="167" x2="138" y2="167" stroke="#c0a840" stroke-width="0.5"/>
+          <text x="100" y="163" text-anchor="middle" font-size="7" fill="#8a6020" font-family="Georgia,serif" font-style="italic">Ammonites rotula</text>
+          <text x="100" y="182" text-anchor="middle" font-size="6" fill="#a07830" font-family="Arial,sans-serif">Jurassic · 150 Ma</text>
+          <!-- Mounting board lines -->
+          <rect x="55" y="148" width="90" height="50" rx="2" fill="none" stroke="#d0c090" stroke-width="0.6" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="v-icon">🦋</div>
+      <div class="v-name">Natura</div>
+      <div class="v-domain">Natural History</div>
+      <div class="v-arrow">
+        Explore
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- TERRA — Seedling sprouting -->
+    <a class="v-card" data-v="terra" href="#" onclick="showComingSoon('Terra'); return false;">
+      <span class="v-soon">Coming soon</span>
+      <!-- Scene: sprout -->
+      <div class="v-scene">
+        <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.55">
+          <!-- Soil line -->
+          <path d="M30 200 Q100 193 170 200" stroke="#8a6a30" stroke-width="2" fill="none" opacity="0.5"/>
+          <!-- Roots -->
+          <path class="root" d="M100 200 Q88 215 78 225" stroke="#8a6a30" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path class="root" d="M100 200 Q112 218 122 228" stroke="#8a6a30" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path class="root" d="M100 200 Q100 218 100 232" stroke="#8a6a30" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- Seed -->
+          <ellipse class="seed" cx="100" cy="198" rx="10" ry="7" fill="#a07830"/>
+          <!-- Stem -->
+          <path class="stem" d="M100 198 Q98 165 100 120" stroke="#4a8a28" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <!-- Left leaf -->
+          <path class="leaf-l" d="M100 150 C80 140 55 142 44 128 C58 115 80 120 96 136 Z" fill="#5aaa38" transform-origin="96px 136px"/>
+          <!-- Right leaf -->
+          <path class="leaf-r" d="M100 135 C120 125 145 127 156 113 C142 100 120 105 104 121 Z" fill="#4a9a28" transform-origin="104px 121px"/>
+          <!-- Small leaves at top -->
+          <path class="leaf-l" d="M100 125 C86 118 70 120 62 108 C74 97 90 100 99 114 Z" fill="#6aba48" transform-origin="99px 114px" style="animation-delay:0.5s"/>
+          <path class="leaf-r" d="M100 118 C114 111 130 113 138 101 C126 90 110 93 101 107 Z" fill="#5aaa38" transform-origin="101px 107px" style="animation-delay:0.6s"/>
+        </svg>
+      </div>
+      <div class="v-icon">🌱</div>
+      <div class="v-name">Terra</div>
+      <div class="v-domain">Gene Banks</div>
+      <div class="v-arrow">
+        Explore
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-in">
+    <span class="mission-label" data-i18n="mission_label">Why this matters</span>
+    <h2 class="mission-h2">
+      The knowledge to save life on Earth<br>
+      <em>already exists.</em><br>
+      It just isn't connected yet.
+    </h2>
+    <p class="mission-body">
+      900+ botanical gardens across Europe hold millions of specimens — 
+      but 90% are invisible to science. Synclair changes that.
+      One intelligence layer for every institution that protects our living world.
+    </p>
+
+    <div class="mission-stats">
+      <div class="m-stat">
+        <div class="m-num">40%</div>
+        <div class="m-label">Of known plant species at risk</div>
+        <div class="m-sub">Identified and prioritised by Synclair AI</div>
+      </div>
+      <div class="m-stat">
+        <div class="m-num">10×</div>
+        <div class="m-label">Grant funding ROI</div>
+        <div class="m-sub">Every €1 invested proves €10 in conservation outcomes</div>
+      </div>
+      <div class="m-stat">
+        <div class="m-num">6 hrs</div>
+        <div class="m-label">From data to grant report</div>
+        <div class="m-sub">Previously 4–6 weeks of manual work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features">
+    <span class="feat-label">Synclair Botanica</span>
+    <h2 class="feat-h2">Stop reporting.<br><em>Start protecting.</em></h2>
+    <p class="feat-sub">
+      You protect Earth's most vital resource.
+      Synclair makes sure your tools finally match your mission.
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-n">Weeks → Hours</div>
+        <div class="feat-n-label">Grant reporting time saved</div>
+        <h3 class="feat-h3">Every action becomes funder-ready evidence automatically.</h3>
+        <p class="feat-p">Reports that took six weeks write themselves. One click. Done before lunch. Science gets its time back.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-n">€0</div>
+        <div class="feat-n-label">Setup fee, always</div>
+        <h3 class="feat-h3">Live in hours. No migration. No consultant. No commitment.</h3>
+        <p class="feat-p">Connect your existing system — IrisBG, BRAHMS, Darwin Core, or direct upload. Synclair meets you where you are.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-n">+67%</div>
+        <div class="feat-n-label">Grant success rate</div>
+        <h3 class="feat-h3">IUCN-verified evidence makes every application undeniable.</h3>
+        <p class="feat-p">Funders say yes to numbers, not narratives. Every specimen scored. Every conservation action documented.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-n">2,000+</div>
+        <div class="feat-n-label">Institutions. One intelligence layer.</div>
+        <h3 class="feat-h3">Your collection, connected to all of science.</h3>
+        <p class="feat-p">Cross-institution intelligence from every connected garden worldwide. Global conservation insights no single institution has ever seen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" style="background: var(--white); border-top: 1px solid var(--border);">
+  <div style="padding: clamp(6rem,12vh,10rem) clamp(2rem,6vw,5rem); max-width: 1280px; margin: 0 auto;">
+
+    <span class="feat-label">Platform Walkthrough</span>
+    <h2 class="feat-h2">From your data to your<br><em>grant report in four steps.</em></h2>
+    <p class="feat-sub">Follow a real director's journey. This is the actual Synclair workflow.</p>
+
+    <!-- Step tabs -->
+    <div id="demoTabs" style="display:flex; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:2rem;">
+      <button class="dtab active" onclick="goStep(1)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:var(--FB);font-size:15px;font-weight:500;border-right:1px solid var(--border);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;color:var(--ink3);">Step 1</span>
+        Connect System
+      </button>
+      <button class="dtab" onclick="goStep(2)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:var(--FB);font-size:15px;font-weight:500;border-right:1px solid var(--border);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;color:var(--ink3);">Step 2</span>
+        Import Data
+      </button>
+      <button class="dtab" onclick="goStep(3)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:var(--FB);font-size:15px;font-weight:500;border-right:1px solid var(--border);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;color:var(--ink3);">Step 3</span>
+        AI Analysis
+      </button>
+      <button class="dtab" onclick="goStep(4)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:var(--FB);font-size:15px;font-weight:500;transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;color:var(--ink3);">Step 4</span>
+        Grant Report
+      </button>
+    </div>
+
+    <!-- PANEL 1 — Connect -->
+    <div class="dpanel active" id="dp1">
+      <p style="font-size:17px;color:var(--ink2);margin-bottom:1.5rem;">Choose your collection management system. Synclair connects in minutes — no API keys, no IT department required.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+        <div class="sys-card selected" onclick="pickSys(this)" style="background:var(--bg);border:1.5px solid var(--Gm);border-radius:12px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🔬</div>
+          <div style="font-size:17px;font-weight:600;color:var(--ink);margin-bottom:0.3rem;">IrisBG</div>
+          <div style="font-size:15px;color:var(--ink3);line-height:1.4;">Native XML export. Connects in minutes.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--Gm);">Most common</div>
+        </div>
+        <div class="sys-card" onclick="pickSys(this)" style="background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🌱</div>
+          <div style="font-size:17px;font-weight:600;color:var(--ink);margin-bottom:0.3rem;">BRAHMS</div>
+          <div style="font-size:15px;color:var(--ink3);line-height:1.4;">Oxford system. Direct export integration.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);">Europe standard</div>
+        </div>
+        <div class="sys-card" onclick="pickSys(this)" style="background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🌐</div>
+          <div style="font-size:17px;font-weight:600;color:var(--ink);margin-bottom:0.3rem;">Darwin Core</div>
+          <div style="font-size:15px;color:var(--ink3);line-height:1.4;">GBIF-compatible universal standard.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);">Universal</div>
+        </div>
+        <div class="sys-card" onclick="pickSys(this)" style="background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">📄</div>
+          <div style="font-size:17px;font-weight:600;color:var(--ink);margin-bottom:0.3rem;">Direct Upload</div>
+          <div style="font-size:15px;color:var(--ink3);line-height:1.4;">CSV, Excel, XML. AI maps your fields automatically.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);">Any format</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="btn-p" onclick="goStep(2)" style="font-size:17px;border:none;cursor:pointer;">Connect &amp; Import →</button>
+      </div>
+    </div>
+
+    <!-- PANEL 2 — Import -->
+    <div class="dpanel" id="dp2" style="display:none;">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:2.5rem;">
+        <h3 style="font-family:var(--FD);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:0.4rem;">Importing your collection</h3>
+        <p style="font-size:17px;color:var(--ink3);margin-bottom:2rem;">Reading your IrisBG export. No reformatting required.</p>
+        <div style="background:rgba(17,26,18,0.08);border-radius:999px;height:8px;margin-bottom:2rem;overflow:hidden;">
+          <div id="pBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,var(--Gm),#2de896);width:0%;transition:width 0.4s ease;"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.5rem;">
+            <div id="cSpec" style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;">0</div>
+            <div style="font-size:15px;color:var(--ink3);margin-top:0.3rem;">Specimens found</div>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.5rem;">
+            <div id="cTaxa" style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;">0</div>
+            <div style="font-size:15px;color:var(--ink3);margin-top:0.3rem;">Taxa identified</div>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.5rem;">
+            <div id="cFlag" style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;">0</div>
+            <div style="font-size:15px;color:var(--ink3);margin-top:0.3rem;">Records flagged</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+          <button class="btn-p" id="btnAI" onclick="goStep(3)" style="font-size:17px;border:none;cursor:pointer;opacity:0.35;pointer-events:none;">Run AI Analysis →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3 — AI Analysis -->
+    <div class="dpanel" id="dp3" style="display:none;">
+      <div id="pipeline" style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+        <div class="prow" id="pr1" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.3s,border-color 0.3s;">
+          <div><div style="font-size:17px;font-weight:500;color:var(--ink);">Species name normalisation</div><div style="font-size:15px;color:var(--ink3);margin-top:2px;">Validating all taxon names against World Flora Online and GBIF backbone</div></div>
+          <span class="pstat" id="ps1" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);">Waiting</span>
+        </div>
+        <div class="prow" id="pr2" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.3s,border-color 0.3s;">
+          <div><div style="font-size:17px;font-weight:500;color:var(--ink);">IUCN Red List cross-reference</div><div style="font-size:15px;color:var(--ink3);margin-top:2px;">Matching every specimen against IUCN Red List 2024 — assigning CR, EN, VU, NT, LC scores</div></div>
+          <span class="pstat" id="ps2" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);">Waiting</span>
+        </div>
+        <div class="prow" id="pr3" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.3s,border-color 0.3s;">
+          <div><div style="font-size:17px;font-weight:500;color:var(--ink);">Conservation priority scoring</div><div style="font-size:15px;color:var(--ink3);margin-top:2px;">Applying BGCI PlantSearch, ThreatSearch, and climate projection models</div></div>
+          <span class="pstat" id="ps3" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);">Waiting</span>
+        </div>
+        <div class="prow" id="pr4" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.3s,border-color 0.3s;">
+          <div><div style="font-size:17px;font-weight:500;color:var(--ink);">Grant evidence mapping</div><div style="font-size:15px;color:var(--ink3);margin-top:2px;">Translating conservation actions into funder-recognised outcome categories</div></div>
+          <span class="pstat" id="ps4" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);">Waiting</span>
+        </div>
+        <div class="prow" id="pr5" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background 0.3s,border-color 0.3s;">
+          <div><div style="font-size:17px;font-weight:500;color:var(--ink);">Grant report generation</div><div style="font-size:15px;color:var(--ink3);margin-top:2px;">Compiling IUCN scores, conservation evidence, and impact metrics into publication-ready report</div></div>
+          <span class="pstat" id="ps5" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);">Waiting</span>
+        </div>
+      </div>
+      <div id="aiKpis" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;opacity:0.25;transition:opacity 0.6s;margin-bottom:1.5rem;">
+        <div style="text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div id="ak1" style="font-family:var(--FD);font-size:36px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">—</div>
+          <div style="font-size:15px;color:var(--ink3);">Taxa scored</div>
+        </div>
+        <div style="text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div id="ak2" style="font-family:var(--FD);font-size:36px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">—</div>
+          <div style="font-size:15px;color:var(--ink3);">At-risk flagged</div>
+        </div>
+        <div style="text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div id="ak3" style="font-family:var(--FD);font-size:36px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">—</div>
+          <div style="font-size:15px;color:var(--ink3);">Grant actions</div>
+        </div>
+        <div style="text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div id="ak4" style="font-family:var(--FD);font-size:36px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">—</div>
+          <div style="font-size:15px;color:var(--ink3);">Frameworks eligible</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="btn-p" id="btnReport" onclick="goStep(4)" style="font-size:17px;border:none;cursor:pointer;opacity:0.35;pointer-events:none;">Generate Grant Report →</button>
+      </div>
+    </div>
+
+    <!-- PANEL 4 — Grant Report -->
+    <div class="dpanel" id="dp4" style="display:none;">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:2.5rem;">
+        <!-- Report header -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;padding-bottom:2rem;margin-bottom:2rem;border-bottom:1px solid var(--border);">
+          <div>
+            <div style="font-family:var(--FD);font-size:28px;font-weight:400;color:var(--ink);line-height:1.2;">Synclair Grant Intelligence Report</div>
+            <div style="font-size:15px;color:var(--ink3);margin-top:0.5rem;">Botanischer Garten München-Nymphenburg · IrisBG · Q1 2026</div>
+          </div>
+          <div style="background:rgba(42,138,72,0.1);border:1px solid rgba(42,138,72,0.2);border-radius:999px;padding:0.45rem 1.1rem;font-size:14px;font-weight:500;color:var(--Gm);white-space:nowrap;">✓ Generated in 4 hrs 12 min</div>
+        </div>
+        <!-- KPIs -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem;">
+          <div style="text-align:center;"><div style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">14,280</div><div style="font-size:15px;color:var(--ink2);">Specimens scored</div></div>
+          <div style="text-align:center;"><div style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">4,714</div><div style="font-size:15px;color:var(--ink2);">At risk</div></div>
+          <div style="text-align:center;"><div style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">2,847</div><div style="font-size:15px;color:var(--ink2);">Conservation actions</div></div>
+          <div style="text-align:center;"><div style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;margin-bottom:0.3rem;">97.4%</div><div style="font-size:15px;color:var(--ink2);">AI confidence</div></div>
+        </div>
+        <!-- Two columns -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+          <div>
+            <div style="font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;">Financial Impact</div>
+            <div style="display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border);font-size:15px;"><span style="color:var(--ink2);">Grant writing consultant</span><span style="font-weight:600;color:var(--Gm);">€22,400 → €0</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border);font-size:15px;"><span style="color:var(--ink2);">Staff hours saved</span><span style="font-weight:600;color:var(--ink);">234 hrs</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border);font-size:15px;"><span style="color:var(--ink2);">Equivalent staff cost saved</span><span style="font-weight:600;color:var(--Gm);">€8,700</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.7rem 0;font-size:15px;"><span style="color:var(--ink2);">New grant applications</span><span style="font-weight:600;color:var(--Gm);">+4 apps</span></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;">Eligible Funding Frameworks</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.7rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:var(--ink);">EU LIFE Programme</span><span style="color:var(--Gm);font-weight:500;">Eligible ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.7rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:var(--ink);">BGCI Conservation Fund</span><span style="color:var(--Gm);font-weight:500;">Eligible ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.7rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:var(--ink);">CBD Kunming-Montreal</span><span style="color:var(--Gm);font-weight:500;">Compliant ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.7rem 1rem;font-size:15px;"><span style="color:var(--ink);">TNFD Nature Risk</span><span style="color:var(--Gm);font-weight:500;">Ready ✓</span></div>
+          </div>
+        </div>
+        <!-- Impact total -->
+        <div style="background:var(--G);border-radius:12px;padding:2.5rem;text-align:center;">
+          <div style="font-family:var(--FD);font-size:64px;font-weight:300;color:#fff;line-height:1;margin-bottom:0.5rem;">€186,000</div>
+          <div style="font-size:19px;font-weight:400;color:rgba(255,255,255,0.9);">Estimated additional funding unlocked this cycle</div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.55);margin-top:0.4rem;">Based on improved evidence quality, time reinvested in applications, and +67% grant success rate</div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:1.5rem;">
+          <a href="mailto:hello@synclair.bio" class="btn-p" style="font-size:17px;">Get this for your garden →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="cta-h2">
+    The first botanical platform<br>
+    <em>in the world.</em>
+  </h2>
+  <p class="cta-body">
+    No setup fee. No migration. No commitment.
+    Request pilot access — live in hours.
+  </p>
+  <div class="cta-btns">
+    <a href="mailto:hello@synclair.bio" class="btn-p">Request Pilot Access →</a>
+  </div>
+  <p class="cta-note" data-i18n="cta_note">Pilot open now · DACH region · IrisBG · BRAHMS · Darwin Core · Direct upload</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <span class="foot-logo">Synclair</span>
+    <ul class="foot-links">
+      <li><a href="#verticals">Platform</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="mailto:hello@synclair.bio" data-i18n="footer_contact">Contact</a></li>
+    </ul>
+    <span class="foot-copy">© 2026 Synclair Holding GmbH · Munich</span>
+  </div>
+</footer>
+
+<style>
+.dtab { background: var(--white); color: var(--ink2); }
+.dtab.active { background: var(--G); color: #fff; }
+.dtab.active span { color: rgba(255,255,255,0.6); }
+.prow.running { background: rgba(42,138,72,0.06) !important; border-color: var(--Gm) !important; }
+.prow.done    { border-color: rgba(42,138,72,0.3) !important; }
+.pstat.running { color: var(--Gm) !important; }
+.pstat.done   { color: var(--Gm) !important; }
+.sys-card.selected { border-color: var(--Gm) !important; background: var(--Gb) !important; }
+@media(max-width:700px){
+  #dp1 > div:first-of-type { grid-template-columns:1fr 1fr !important; }
+  #dp4 .grid2 { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script>
+function goStep(n) {
+  document.querySelectorAll('.dtab').forEach((t,i) => t.classList.toggle('active', i+1===n));
+  document.querySelectorAll('.dpanel').forEach((p,i) => p.style.display = i+1===n ? 'block' : 'none');
+  if (n===2) startImport();
+  if (n===3) startAnalysis();
+}
+
+function pickSys(el) {
+  document.querySelectorAll('.sys-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function startImport() {
+  const bar  = document.getElementById('pBar');
+  const spec = document.getElementById('cSpec');
+  const taxa = document.getElementById('cTaxa');
+  const flag = document.getElementById('cFlag');
+  const btn  = document.getElementById('btnAI');
+  let p = 0;
+  bar.style.width = '0%';
+  spec.textContent = taxa.textContent = flag.textContent = '0';
+  btn.style.opacity = '0.35'; btn.style.pointerEvents = 'none';
+  const iv = setInterval(() => {
+    p = Math.min(100, p + 1.8);
+    bar.style.width = p + '%';
+    spec.textContent = Math.round(p/100*14280).toLocaleString();
+    taxa.textContent = Math.round(p/100*3840).toLocaleString();
+    flag.textContent = Math.round(p/100*284).toLocaleString();
+    if (p >= 100) {
+      clearInterval(iv);
+      btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+    }
+  }, 35);
+}
+
+function startAnalysis() {
+  const steps = [
+    { r:'pr1', s:'ps1', d:400  },
+    { r:'pr2', s:'ps2', d:1100 },
+    { r:'pr3', s:'ps3', d:2000 },
+    { r:'pr4', s:'ps4', d:2900 },
+    { r:'pr5', s:'ps5', d:3700 },
+  ];
+  const btn = document.getElementById('btnReport');
+  btn.style.opacity = '0.35'; btn.style.pointerEvents = 'none';
+  document.getElementById('aiKpis').style.opacity = '0.25';
+
+  steps.forEach((p, i) => {
+    document.getElementById(p.r).className = 'prow';
+    document.getElementById(p.s).className = 'pstat';
+    document.getElementById(p.s).textContent = 'Waiting';
+    setTimeout(() => {
+      document.getElementById(p.r).classList.add('running');
+      document.getElementById(p.s).classList.add('running');
+      document.getElementById(p.s).textContent = 'Running…';
+    }, p.d);
+    setTimeout(() => {
+      document.getElementById(p.r).classList.remove('running');
+      document.getElementById(p.r).classList.add('done');
+      document.getElementById(p.s).classList.remove('running');
+      document.getElementById(p.s).classList.add('done');
+      document.getElementById(p.s).textContent = 'Complete ✓';
+      if (i === 4) {
+        document.getElementById('ak1').textContent = '14,280';
+        document.getElementById('ak2').textContent = '4,714';
+        document.getElementById('ak3').textContent = '2,847';
+        document.getElementById('ak4').textContent = '5';
+        document.getElementById('aiKpis').style.opacity = '1';
+        btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+      }
+    }, p.d + 700);
+  });
+}
+</script>
+<!-- ════════════════════════════════════
+     BOTANICA FULL-SCREEN PANEL
+════════════════════════════════════ -->
+<div id="botanica-panel" style="
+  position:fixed; inset:0; z-index:500;
+  background:#ffffff;
+  transform:translateY(100%);
+  transition:transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  overflow-y:auto;
+  font-family:'Jost',system-ui,sans-serif;
+  font-size:17px; font-weight:300; color:#111a12;
+">
+  <!-- Panel Nav -->
+  <nav style="position:sticky;top:0;z-index:10;background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);border-bottom:1px solid rgba(17,26,18,0.1);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 clamp(2rem,5vw,4rem);height:64px;max-width:1280px;margin:0 auto;">
+      <button onclick="closeBotanica()" style="display:flex;align-items:center;gap:0.5rem;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;color:#6a7e6c;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="back_all">All Verticals</span>
+      </button>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:#111a12;">Synclair <span style="font-size:13px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:#2a8a48;margin-left:0.4rem;">Botanica</span></span>
+      <a href="mailto:hello@synclair.bio" style="background:#1a4a24;color:#fff;padding:0.6rem 1.4rem;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;">Request Access</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:5rem;padding:80px clamp(2rem,7vw,6rem) 5rem;" class="b-hero-grid">
+    <div>
+      <span style="font-size:14px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#2a8a48;margin-bottom:1.8rem;display:block;">Synclair Botanica · Pilot open — DACH region</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,88px);font-weight:300;line-height:1.04;letter-spacing:-0.02em;color:#111a12;margin-bottom:1.8rem;">Somewhere in your collection is a cure <em style="font-style:italic;color:#2a8a48;">we haven't found yet.</em></h1>
+      <p style="font-size:21px;font-weight:300;color:#2c3e2e;max-width:520px;line-height:1.68;margin-bottom:3rem;">The first intelligent botanical platform in the world. AI specimen identification, IUCN conservation scoring, and automated grant reporting — live in hours, not months.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+        <a href="mailto:hello@synclair.bio" style="background:#1a4a24;color:#fff;padding:1rem 2.2rem;border-radius:999px;font-size:17px;font-weight:500;text-decoration:none;">Request Pilot Access</a>
+        <a href="#b-demo" onclick="document.getElementById('b-demo').scrollIntoView({behavior:'smooth'});return false;" style="border:1.5px solid rgba(17,26,18,0.1);color:#2c3e2e;padding:1rem 2.2rem;border-radius:999px;font-size:17px;font-weight:400;text-decoration:none;">See Platform Demo</a>
+      </div>
+      <div style="display:flex;gap:1.8rem;flex-wrap:wrap;">
+        <span style="font-size:15px;color:#6a7e6c;display:flex;align-items:center;gap:0.45rem;"><span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>No setup fee</span>
+        <span style="font-size:15px;color:#6a7e6c;display:flex;align-items:center;gap:0.45rem;"><span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>No migration</span>
+        <span style="font-size:15px;color:#6a7e6c;display:flex;align-items:center;gap:0.45rem;"><span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>Live in hours</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+      <div style="grid-column:span 2;background:#1a4a24;border-radius:14px;padding:2rem 1.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#4ecf8a;line-height:1;margin-bottom:0.4rem;">6 hrs</div>
+        <div style="font-size:17px;font-weight:500;color:#fff;">Grant report — fully automated</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Previously 4–6 weeks of manual work</div>
+      </div>
+      <div style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:14px;padding:2rem 1.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:#2a8a48;line-height:1;margin-bottom:0.4rem;">10×</div>
+        <div style="font-size:17px;font-weight:500;color:#111a12;">Grant funding ROI</div>
+        <div style="font-size:14px;color:#6a7e6c;margin-top:0.2rem;">Every €1 proves €10 in outcomes</div>
+      </div>
+      <div style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:14px;padding:2rem 1.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:#2a8a48;line-height:1;margin-bottom:0.4rem;">+67%</div>
+        <div style="font-size:17px;font-weight:500;color:#111a12;">Grant success rate</div>
+        <div style="font-size:14px;color:#6a7e6c;margin-top:0.2rem;">IUCN-verified evidence wins</div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1px solid rgba(17,26,18,0.1);">
+
+  <!-- Demo -->
+  <div id="b-demo" style="padding:clamp(5rem,10vh,8rem) clamp(2rem,7vw,6rem);max-width:1280px;margin:0 auto;">
+    <span style="font-size:14px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#2a8a48;margin-bottom:1.4rem;display:block;">Platform Walkthrough</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,60px);font-weight:300;line-height:1.1;color:#111a12;margin-bottom:1.2rem;">From your data to your <em style="font-style:italic;color:#2a8a48;">grant report in four steps.</em></h2>
+    <p style="font-size:19px;font-weight:300;color:#2c3e2e;max-width:600px;line-height:1.7;margin-bottom:3rem;">Follow a real director's journey. This is the actual Synclair workflow.</p>
+
+    <!-- Tabs -->
+    <div style="display:flex;border:1px solid rgba(17,26,18,0.1);border-radius:12px;overflow:hidden;margin-bottom:2rem;">
+      <button class="b-tab active-tab" onclick="bStep(1)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;border-right:1px solid rgba(17,26,18,0.1);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:inherit;opacity:0.7;margin-bottom:3px;">Step 1</span>Connect
+      </button>
+      <button class="b-tab" onclick="bStep(2)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;border-right:1px solid rgba(17,26,18,0.1);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:inherit;opacity:0.7;margin-bottom:3px;">Step 2</span>Import
+      </button>
+      <button class="b-tab" onclick="bStep(3)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;border-right:1px solid rgba(17,26,18,0.1);transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:inherit;opacity:0.7;margin-bottom:3px;">Step 3</span>AI Analysis
+      </button>
+      <button class="b-tab" onclick="bStep(4)" style="flex:1;padding:1.1rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;transition:background 0.2s,color 0.2s;">
+        <span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:inherit;opacity:0.7;margin-bottom:3px;">Step 4</span>Grant Report
+      </button>
+    </div>
+
+    <!-- Step 1 -->
+    <div id="bp1" class="b-panel">
+      <p style="font-size:17px;color:#2c3e2e;margin-bottom:1.5rem;">Choose your collection management system. Connects in minutes — no IT department required.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+        <div class="bsc selected-sys" onclick="bPickSys(this)" style="background:#e6f4ec;border:1.5px solid #2a8a48;border-radius:12px;padding:1.5rem;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🔬</div>
+          <div style="font-size:17px;font-weight:600;color:#111a12;margin-bottom:0.3rem;">IrisBG</div>
+          <div style="font-size:14px;color:#6a7e6c;line-height:1.4;">Native XML export. Connects in minutes.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#2a8a48;">Most common</div>
+        </div>
+        <div class="bsc" onclick="bPickSys(this)" style="background:#f9faf9;border:1.5px solid rgba(17,26,18,0.1);border-radius:12px;padding:1.5rem;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🌱</div>
+          <div style="font-size:17px;font-weight:600;color:#111a12;margin-bottom:0.3rem;">BRAHMS</div>
+          <div style="font-size:14px;color:#6a7e6c;line-height:1.4;">Oxford system. Direct export.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#6a7e6c;">Europe standard</div>
+        </div>
+        <div class="bsc" onclick="bPickSys(this)" style="background:#f9faf9;border:1.5px solid rgba(17,26,18,0.1);border-radius:12px;padding:1.5rem;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">🌐</div>
+          <div style="font-size:17px;font-weight:600;color:#111a12;margin-bottom:0.3rem;">Darwin Core</div>
+          <div style="font-size:14px;color:#6a7e6c;line-height:1.4;">GBIF-compatible standard.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#6a7e6c;">Universal</div>
+        </div>
+        <div class="bsc" onclick="bPickSys(this)" style="background:#f9faf9;border:1.5px solid rgba(17,26,18,0.1);border-radius:12px;padding:1.5rem;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:0.7rem;">📄</div>
+          <div style="font-size:17px;font-weight:600;color:#111a12;margin-bottom:0.3rem;">Direct Upload</div>
+          <div style="font-size:14px;color:#6a7e6c;line-height:1.4;">CSV, Excel, XML. AI maps fields.</div>
+          <div style="margin-top:0.6rem;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#6a7e6c;">Any format</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button onclick="bStep(2)" style="background:#1a4a24;color:#fff;padding:1rem 2.2rem;border-radius:999px;font-size:17px;font-weight:500;border:none;cursor:pointer;">Connect &amp; Import →</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="bp2" class="b-panel" style="display:none;">
+      <div style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:14px;padding:2.5rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#111a12;margin-bottom:0.4rem;">Importing your collection</div>
+        <div style="font-size:17px;color:#6a7e6c;margin-bottom:2rem;">Reading your IrisBG export. No reformatting required.</div>
+        <div style="background:rgba(17,26,18,0.08);border-radius:999px;height:8px;margin-bottom:2rem;overflow:hidden;">
+          <div id="b-pbar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#2a8a48,#2de896);width:0%;transition:width 0.4s ease;"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
+          <div style="background:#fff;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.5rem;">
+            <div id="b-spec" style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;">0</div>
+            <div style="font-size:14px;color:#6a7e6c;margin-top:0.3rem;">Specimens found</div>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.5rem;">
+            <div id="b-taxa" style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;">0</div>
+            <div style="font-size:14px;color:#6a7e6c;margin-top:0.3rem;">Taxa identified</div>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.5rem;">
+            <div id="b-flag" style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;">0</div>
+            <div style="font-size:14px;color:#6a7e6c;margin-top:0.3rem;">Records flagged</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+          <button id="b-btnAI" onclick="bStep(3)" style="background:#1a4a24;color:#fff;padding:1rem 2.2rem;border-radius:999px;font-size:17px;font-weight:500;border:none;cursor:pointer;opacity:0.35;pointer-events:none;">Run AI Analysis →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="bp3" class="b-panel" style="display:none;">
+      <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+        <div id="b-pr1" style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:17px;font-weight:500;color:#111a12;">Species name normalisation</div><div style="font-size:14px;color:#6a7e6c;margin-top:2px;">Validating all taxon names against World Flora Online and GBIF backbone</div></div>
+          <span id="b-ps1" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6a7e6c;white-space:nowrap;">Waiting</span>
+        </div>
+        <div id="b-pr2" style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:17px;font-weight:500;color:#111a12;">IUCN Red List cross-reference</div><div style="font-size:14px;color:#6a7e6c;margin-top:2px;">Matching every specimen against IUCN Red List 2024 — CR, EN, VU, NT, LC scores</div></div>
+          <span id="b-ps2" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6a7e6c;white-space:nowrap;">Waiting</span>
+        </div>
+        <div id="b-pr3" style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:17px;font-weight:500;color:#111a12;">Conservation priority scoring</div><div style="font-size:14px;color:#6a7e6c;margin-top:2px;">Applying BGCI PlantSearch, ThreatSearch, and climate projection models</div></div>
+          <span id="b-ps3" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6a7e6c;white-space:nowrap;">Waiting</span>
+        </div>
+        <div id="b-pr4" style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:17px;font-weight:500;color:#111a12;">Grant evidence mapping</div><div style="font-size:14px;color:#6a7e6c;margin-top:2px;">Translating conservation actions into funder-recognised outcome categories</div></div>
+          <span id="b-ps4" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6a7e6c;white-space:nowrap;">Waiting</span>
+        </div>
+        <div id="b-pr5" style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:17px;font-weight:500;color:#111a12;">Grant report generation</div><div style="font-size:14px;color:#6a7e6c;margin-top:2px;">Compiling scores, evidence, and impact metrics into publication-ready report</div></div>
+          <span id="b-ps5" style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6a7e6c;white-space:nowrap;">Waiting</span>
+        </div>
+      </div>
+      <div id="b-akpis" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;opacity:0.25;transition:opacity 0.6s;">
+        <div style="text-align:center;background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem;"><div id="b-ak1" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">—</div><div style="font-size:14px;color:#6a7e6c;">Taxa scored</div></div>
+        <div style="text-align:center;background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem;"><div id="b-ak2" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">—</div><div style="font-size:14px;color:#6a7e6c;">At-risk flagged</div></div>
+        <div style="text-align:center;background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem;"><div id="b-ak3" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">—</div><div style="font-size:14px;color:#6a7e6c;">Grant actions</div></div>
+        <div style="text-align:center;background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.2rem;"><div id="b-ak4" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">—</div><div style="font-size:14px;color:#6a7e6c;">Frameworks</div></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button id="b-btnReport" onclick="bStep(4)" style="background:#1a4a24;color:#fff;padding:1rem 2.2rem;border-radius:999px;font-size:17px;font-weight:500;border:none;cursor:pointer;opacity:0.35;pointer-events:none;">Generate Grant Report →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div id="bp4" class="b-panel" style="display:none;">
+      <div style="background:#f9faf9;border:1px solid rgba(17,26,18,0.1);border-radius:16px;padding:2.5rem;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;padding-bottom:2rem;margin-bottom:2rem;border-bottom:1px solid rgba(17,26,18,0.1);">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#111a12;">Synclair Grant Intelligence Report</div>
+            <div style="font-size:14px;color:#6a7e6c;margin-top:0.4rem;">Botanischer Garten München-Nymphenburg · IrisBG · Q1 2026</div>
+          </div>
+          <div style="background:rgba(42,138,72,0.1);border:1px solid rgba(42,138,72,0.2);border-radius:999px;padding:0.4rem 1rem;font-size:14px;font-weight:500;color:#2a8a48;">✓ Generated in 4 hrs 12 min</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem;text-align:center;">
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">14,280</div><div style="font-size:15px;color:#2c3e2e;">Specimens scored</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">4,714</div><div style="font-size:15px;color:#2c3e2e;">At risk</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">2,847</div><div style="font-size:15px;color:#2c3e2e;">Conservation actions</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;margin-bottom:0.3rem;">97.4%</div><div style="font-size:15px;color:#2c3e2e;">AI confidence</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+          <div>
+            <div style="font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#6a7e6c;margin-bottom:1rem;">Financial Impact</div>
+            <div style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(17,26,18,0.08);font-size:15px;"><span style="color:#2c3e2e;">Grant writing consultant</span><span style="font-weight:600;color:#2a8a48;">€22,400 → €0</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(17,26,18,0.08);font-size:15px;"><span style="color:#2c3e2e;">Staff hours saved</span><span style="font-weight:600;color:#111a12;">234 hrs</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(17,26,18,0.08);font-size:15px;"><span style="color:#2c3e2e;">Staff cost saved</span><span style="font-weight:600;color:#2a8a48;">€8,700</span></div>
+            <div style="display:flex;justify-content:space-between;padding:0.65rem 0;font-size:15px;"><span style="color:#2c3e2e;">New grant applications</span><span style="font-weight:600;color:#2a8a48;">+4 apps</span></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#6a7e6c;margin-bottom:1rem;">Eligible Funding Frameworks</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.65rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:#111a12;">EU LIFE Programme</span><span style="color:#2a8a48;font-weight:500;font-size:14px;">Eligible ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.65rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:#111a12;">BGCI Conservation Fund</span><span style="color:#2a8a48;font-weight:500;font-size:14px;">Eligible ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.65rem 1rem;font-size:15px;margin-bottom:0.5rem;"><span style="color:#111a12;">CBD Kunming-Montreal</span><span style="color:#2a8a48;font-weight:500;font-size:14px;">Compliant ✓</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(42,138,72,0.06);border-radius:8px;padding:0.65rem 1rem;font-size:15px;"><span style="color:#111a12;">TNFD Nature Risk</span><span style="color:#2a8a48;font-weight:500;font-size:14px;">Ready ✓</span></div>
+          </div>
+        </div>
+        <div style="background:#1a4a24;border-radius:12px;padding:2.5rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:#fff;line-height:1;margin-bottom:0.5rem;">€186,000</div>
+          <div style="font-size:19px;color:rgba(255,255,255,0.9);margin-bottom:0.3rem;">Estimated additional funding unlocked this cycle</div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.5);">Based on improved evidence quality, time reinvested, and +67% grant success rate</div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-top:2rem;">
+          <a href="mailto:hello@synclair.bio" style="background:#1a4a24;color:#fff;padding:1rem 2.4rem;border-radius:999px;font-size:17px;font-weight:500;text-decoration:none;">Get this for your garden →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.b-tab { background:#fff; color:#2c3e2e; }
+.active-tab { background:#1a4a24 !important; color:#fff !important; }
+.bsc { transition: border-color 0.2s, background 0.2s; }
+.bsc:hover { border-color: #2a8a48 !important; }
+</style>
+
+<script>
+function openBotanica() {
+  const p = document.getElementById('botanica-panel');
+  p.style.transform = 'translateY(0)';
+  p.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeBotanica() {
+  document.getElementById('botanica-panel').style.transform = 'translateY(100%)';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBotanica(); });
+
+function bStep(n) {
+  document.querySelectorAll('.b-tab').forEach((t,i) => {
+    t.classList.toggle('active-tab', i+1===n);
+  });
+  document.querySelectorAll('.b-panel').forEach((p,i) => {
+    p.style.display = i+1===n ? 'block' : 'none';
+  });
+  if (n===2) bStartImport();
+  if (n===3) bStartAnalysis();
+}
+function bPickSys(el) {
+  document.querySelectorAll('.bsc').forEach(c => {
+    c.classList.remove('selected-sys');
+    c.style.background = '#f9faf9';
+    c.style.borderColor = 'rgba(17,26,18,0.1)';
+  });
+  el.style.background = '#e6f4ec';
+  el.style.borderColor = '#2a8a48';
+}
+function bStartImport() {
+  const bar=document.getElementById('b-pbar'),
+        spec=document.getElementById('b-spec'),
+        taxa=document.getElementById('b-taxa'),
+        flag=document.getElementById('b-flag'),
+        btn=document.getElementById('b-btnAI');
+  let p=0; bar.style.width='0%';
+  spec.textContent=taxa.textContent=flag.textContent='0';
+  btn.style.opacity='0.35'; btn.style.pointerEvents='none';
+  const iv=setInterval(()=>{
+    p=Math.min(100,p+1.8); bar.style.width=p+'%';
+    spec.textContent=Math.round(p/100*14280).toLocaleString();
+    taxa.textContent=Math.round(p/100*3840).toLocaleString();
+    flag.textContent=Math.round(p/100*284).toLocaleString();
+    if(p>=100){clearInterval(iv);btn.style.opacity='1';btn.style.pointerEvents='auto';}
+  },35);
+}
+function bStartAnalysis() {
+  const steps=[{r:'b-pr1',s:'b-ps1',d:400},{r:'b-pr2',s:'b-ps2',d:1100},{r:'b-pr3',s:'b-ps3',d:2000},{r:'b-pr4',s:'b-ps4',d:2900},{r:'b-pr5',s:'b-ps5',d:3700}];
+  const btn=document.getElementById('b-btnReport');
+  btn.style.opacity='0.35'; btn.style.pointerEvents='none';
+  document.getElementById('b-akpis').style.opacity='0.25';
+  steps.forEach((s,i)=>{
+    const row=document.getElementById(s.r), stat=document.getElementById(s.s);
+    row.style.background='#f9faf9'; row.style.borderColor='rgba(17,26,18,0.1)';
+    stat.style.color='#6a7e6c'; stat.textContent='Waiting';
+    setTimeout(()=>{
+      row.style.background='rgba(42,138,72,0.06)';
+      row.style.borderColor='#2a8a48';
+      stat.style.color='#2a8a48'; stat.textContent='Running…';
+    },s.d);
+    setTimeout(()=>{
+      row.style.borderColor='rgba(42,138,72,0.3)';
+      stat.style.color='#2a8a48'; stat.textContent='Complete ✓';
+      if(i===4){
+        document.getElementById('b-ak1').textContent='14,280';
+        document.getElementById('b-ak2').textContent='4,714';
+        document.getElementById('b-ak3').textContent='2,847';
+        document.getElementById('b-ak4').textContent='5';
+        document.getElementById('b-akpis').style.opacity='1';
+        btn.style.opacity='1'; btn.style.pointerEvents='auto';
+      }
+    },s.d+700);
+  });
+}
+</script>
+<script>
+// ═══════════════════════════════════════
+//  SYNCLAIR i18n — EN / DE
+// ═══════════════════════════════════════
+const LANG = {
+  en: {
+    // Nav
+    nav_platform:   'Platform',
+    nav_mission:    'Mission',
+    nav_features:   'Features',
+    nav_cta:        'Get Access',
+    footer_contact: 'Contact',
+    back_all:       'All Verticals',
+    btn_request:    'Request Access',
+
+    // Hero
+    hero_eyebrow:   'The Living World Platform',
+    hero_h1:        'Intelligence<br>for <em>life<br>on Earth.</em>',
+    hero_sub:       'AI-native tools for the institutions that protect our planet — botanical gardens, marine institutes, natural history museums, and gene banks.',
+    hero_btn_p:     'Enter Botanica',
+    hero_btn_g:     'See All Verticals',
+    pill_1:         'No setup fee',
+    pill_2:         'No migration',
+    pill_3:         'Live in hours',
+
+    // Stat boxes
+    stat1_n:    '6 hrs',
+    stat1_l:    'Grant report — fully automated',
+    stat1_s:    'Previously 4–6 weeks of manual work',
+    stat2_n:    '10×',
+    stat2_l:    'Grant funding ROI',
+    stat2_s:    'Every €1 proves €10 in conservation',
+    stat3_n:    '+67%',
+    stat3_l:    'Grant success rate',
+    stat3_s:    'IUCN-verified evidence that wins',
+    stat4_n:    '€0',
+    stat4_l:    'Setup fee. Always.',
+    stat4_s:    'No migration. Live from day one.',
+
+    // Verticals
+    v_choose_label: 'Choose your world',
+    v_choose_h2:    'One platform.<br><em>Four living worlds.</em>',
+    v_choose_note:  'Click any vertical to enter its world. Botanica is live now — Marina, Natura and Terra launching soon.',
+    v_enter:        'Enter',
+    v_explore:      'Explore',
+    v_live:         'Live Now',
+
+    // Mission
+    mission_label:  'Why this matters',
+    mission_h2:     'The knowledge to save life on Earth<br><em>already exists.</em><br>It just isn\'t connected yet.',
+    mission_body:   '900+ botanical gardens across Europe hold millions of specimens — but 90% are invisible to science. Synclair changes that. One intelligence layer for every institution that protects our living world.',
+    m1_n: '40%', m1_l: 'Of known plant species at risk', m1_s: 'Identified and prioritised by Synclair AI',
+    m2_n: '10×', m2_l: 'Grant funding ROI',             m2_s: 'Every €1 invested proves €10 in conservation outcomes',
+    m3_n: '6 hrs', m3_l: 'From data to grant report',   m3_s: 'Previously 4–6 weeks of manual work',
+
+    // Features
+    feat_label: 'Synclair Botanica',
+    feat_h2:    'Stop reporting.<br><em>Start protecting.</em>',
+    feat_sub:   'You protect Earth\'s most vital resource. Synclair makes sure your tools finally match your mission.',
+    f1_n: 'Weeks → Hours', f1_sub: 'Grant reporting time saved', f1_h3: 'Every action becomes funder-ready evidence automatically.', f1_p: 'Reports that took six weeks write themselves. One click. Done before lunch. Science gets its time back.',
+    f2_n: '€0',           f2_sub: 'Setup fee, always',           f2_h3: 'Live in hours. No migration. No consultant. No commitment.', f2_p: 'Connect your existing system — IrisBG, BRAHMS, Darwin Core, or direct upload. Synclair meets you where you are.',
+    f3_n: '+67%',         f3_sub: 'Grant success rate',          f3_h3: 'IUCN-verified evidence makes every application undeniable.', f3_p: 'Funders say yes to numbers, not narratives. Every specimen scored. Every conservation action documented.',
+    f4_n: '2,000+',       f4_sub: 'Institutions. One intelligence layer.', f4_h3: 'Your collection, connected to all of science.', f4_p: 'Cross-institution intelligence from every connected garden worldwide. Global conservation insights no single institution has ever seen.',
+
+    // Demo
+    demo_label: 'Platform Walkthrough',
+    demo_h2:    'From your data to your<br><em>grant report in four steps.</em>',
+    demo_sub:   'Follow a real director\'s journey. This is the actual Synclair workflow.',
+    step1: 'Connect System', step2: 'Import Data', step3: 'AI Analysis', step4: 'Grant Report',
+    demo_intro: 'Choose your collection management system. Synclair connects in minutes — no IT department required.',
+    btn_connect: 'Connect & Import →', btn_ai: 'Run AI Analysis →', btn_report: 'Generate Grant Report →',
+
+    // CTA
+    cta_label: 'Pilot open now · DACH region',
+    cta_h2:    'The first botanical platform<br><em>in the world.</em> Start today.',
+    cta_body:  'No setup fee. No migration. No commitment. Request pilot access for your garden — live in hours.',
+    cta_btn:   'Request Pilot Access →',
+    cta_note:  'Pilot open now · DACH region · IrisBG · BRAHMS · Darwin Core · Direct upload',
+
+    // Footer
+    foot_copy: '© 2026 Synclair Holding GmbH · Munich',
+
+    // Botanica panel
+    b_eyebrow:  'Synclair Botanica · Pilot open — DACH region',
+    b_h1:       'Somewhere in your collection is a cure <em>we haven\'t found yet.</em>',
+    b_lead:     'The first intelligent botanical platform in the world. AI specimen identification, IUCN conservation scoring, and automated grant reporting — live in hours, not months.',
+    b_btn_p:    'Request Pilot Access',
+    b_btn_g:    'See Platform Demo',
+    b_pill1: 'No setup fee', b_pill2: 'No migration', b_pill3: 'Live in hours',
+    b_demo_label: 'Platform Walkthrough',
+    b_demo_h2:  'From your data to your <em>grant report in four steps.</em>',
+    b_demo_sub: 'Follow a real director\'s journey. This is the actual Synclair workflow.',
+  },
+
+  de: {
+    // Nav
+    nav_platform:   'Plattform',
+    nav_mission:    'Mission',
+    nav_features:   'Funktionen',
+    nav_cta:        'Zugang anfragen',
+    footer_contact: 'Kontakt',
+    back_all:       'Alle Vertikale',
+    btn_request:    'Zugang anfragen',
+
+    // Hero
+    hero_eyebrow:   'Die Plattform für die lebendige Welt',
+    hero_h1:        'Intelligenz<br>für <em>das Leben<br>auf der Erde.</em>',
+    hero_sub:       'KI-native Werkzeuge für die Institutionen, die unseren Planeten schützen — Botanische Gärten, Meeresinstitute, Naturkundemuseen und Genbanken.',
+    hero_btn_p:     'Botanica öffnen',
+    hero_btn_g:     'Alle Vertikale',
+    pill_1:         'Keine Einrichtungsgebühr',
+    pill_2:         'Keine Migration',
+    pill_3:         'In Stunden live',
+
+    // Stat boxes
+    stat1_n:    '6 Std.',
+    stat1_l:    'Förderbericht — vollständig automatisiert',
+    stat1_s:    'Bisher 4–6 Wochen manuelle Arbeit',
+    stat2_n:    '10×',
+    stat2_l:    'Förder-ROI',
+    stat2_s:    'Jeder €1 beweist €10 im Naturschutz',
+    stat3_n:    '+67%',
+    stat3_l:    'Förderquote',
+    stat3_s:    'IUCN-verifizierte Belege überzeugen',
+    stat4_n:    '€0',
+    stat4_l:    'Einrichtungsgebühr. Immer.',
+    stat4_s:    'Keine Migration. Ab Tag eins live.',
+
+    // Verticals
+    v_choose_label: 'Wählen Sie Ihre Welt',
+    v_choose_h2:    'Eine Plattform.<br><em>Vier lebendige Welten.</em>',
+    v_choose_note:  'Klicken Sie auf eine Vertikale, um ihre Welt zu betreten. Botanica ist jetzt live — Marina, Natura und Terra starten bald.',
+    v_enter:        'Öffnen',
+    v_explore:      'Entdecken',
+    v_live:         'Jetzt live',
+
+    // Mission
+    mission_label:  'Warum das wichtig ist',
+    mission_h2:     'Das Wissen, das Leben auf der Erde retten kann,<br><em>existiert bereits.</em><br>Es ist nur noch nicht verbunden.',
+    mission_body:   'Über 900 Botanische Gärten in Europa beherbergen Millionen von Exemplaren — doch 90% sind für die Wissenschaft unsichtbar. Synclair ändert das. Eine Intelligenzschicht für jede Institution, die unsere lebendige Welt schützt.',
+    m1_n: '40%',    m1_l: 'Der bekannten Pflanzenarten bedroht',  m1_s: 'Identifiziert und priorisiert durch Synclair AI',
+    m2_n: '10×',    m2_l: 'Förder-ROI',                           m2_s: 'Jeder investierte €1 beweist €10 Naturschutzwirkung',
+    m3_n: '6 Std.', m3_l: 'Von Daten zum Förderbericht',          m3_s: 'Bisher 4–6 Wochen manuelle Arbeit',
+
+    // Features
+    feat_label: 'Synclair Botanica',
+    feat_h2:    'Berichten Sie weniger.<br><em>Schützen Sie mehr.</em>',
+    feat_sub:   'Sie schützen die wichtigste Ressource der Erde. Synclair stellt sicher, dass Ihre Werkzeuge endlich Ihrer Mission entsprechen.',
+    f1_n: 'Wochen → Stunden', f1_sub: 'Eingesparte Berichtszeit', f1_h3: 'Jede Maßnahme wird automatisch zur förderfähigen Dokumentation.', f1_p: 'Berichte, die sechs Wochen dauerten, schreiben sich selbst. Ein Klick. Vor dem Mittagessen fertig. Die Wissenschaft bekommt ihre Zeit zurück.',
+    f2_n: '€0',               f2_sub: 'Einrichtungsgebühr, immer',  f2_h3: 'In Stunden live. Keine Migration. Kein Berater. Keine Bindung.', f2_p: 'Verbinden Sie Ihr bestehendes System — IrisBG, BRAHMS, Darwin Core oder direkter Upload. Synclair kommt zu Ihnen.',
+    f3_n: '+67%',             f3_sub: 'Förderquote',                f3_h3: 'IUCN-verifizierte Belege machen jede Bewerbung unwiderstehlich.', f3_p: 'Förderer sagen ja zu Zahlen, nicht zu Erzählungen. Jedes Exemplar bewertet. Jede Naturschutzmaßnahme dokumentiert.',
+    f4_n: '2.000+',           f4_sub: 'Institutionen. Eine Intelligenzschicht.', f4_h3: 'Ihre Sammlung, verbunden mit der gesamten Wissenschaft.', f4_p: 'Institutionsübergreifende Intelligenz aus jedem verbundenen Garten weltweit. Globale Erkenntnisse, die keine einzelne Institution je hatte.',
+
+    // Demo
+    demo_label: 'Plattform-Walkthrough',
+    demo_h2:    'Von Ihren Daten zum<br><em>Förderbericht in vier Schritten.</em>',
+    demo_sub:   'Folgen Sie dem Weg eines echten Direktors. Das ist der tatsächliche Synclair-Workflow.',
+    step1: 'System verbinden', step2: 'Daten importieren', step3: 'KI-Analyse', step4: 'Förderbericht',
+    demo_intro: 'Wählen Sie Ihr Sammlungsmanagementsystem. Synclair verbindet sich in Minuten — keine IT-Abteilung erforderlich.',
+    btn_connect: 'Verbinden & Importieren →', btn_ai: 'KI-Analyse starten →', btn_report: 'Förderbericht erstellen →',
+
+    // CTA
+    cta_label: 'Pilot jetzt offen · DACH-Region',
+    cta_h2:    'Die erste botanische Plattform<br><em>der Welt.</em> Starten Sie heute.',
+    cta_body:  'Keine Einrichtungsgebühr. Keine Migration. Keine Bindung. Pilotgarten-Zugang anfragen — in Stunden live.',
+    cta_btn:   'Pilotgarten-Zugang anfragen →',
+    cta_note:  'Pilot jetzt offen · DACH-Region · IrisBG · BRAHMS · Darwin Core · Direktupload',
+
+    // Footer
+    foot_copy: '© 2026 Synclair Holding GmbH · München',
+
+    // Botanica panel
+    b_eyebrow:  'Synclair Botanica · Pilot offen — DACH-Region',
+    b_h1:       'Irgendwo in Ihrer Sammlung schlummert eine Heilpflanze, <em>die wir noch nicht gefunden haben.</em>',
+    b_lead:     'Die erste intelligente botanische Plattform der Welt. KI-gestützte Artenbestimmung, IUCN-Naturschutzbewertung und automatisierte Förderberichte — in Stunden live, nicht in Monaten.',
+    b_btn_p:    'Pilotgarten-Zugang anfragen',
+    b_btn_g:    'Plattform-Demo ansehen',
+    b_pill1: 'Keine Einrichtungsgebühr', b_pill2: 'Keine Migration', b_pill3: 'In Stunden live',
+    b_demo_label: 'Plattform-Walkthrough',
+    b_demo_h2:  'Von Ihren Daten zum <em>Förderbericht in vier Schritten.</em>',
+    b_demo_sub: 'Folgen Sie dem Weg eines echten Direktors. Das ist der tatsächliche Synclair-Workflow.',
+  }
+};
+
+let currentLang = 'en';
+
+function switchLang() {
+  currentLang = currentLang === 'en' ? 'de' : 'en';
+  const label = currentLang === 'en' ? 'DE' : 'EN';
+  const lb = document.getElementById('lang-btn');
+  const lbm = document.getElementById('lang-btn-mobile');
+  if (lb) lb.textContent = label;
+  if (lbm) lbm.textContent = label;
+  applyLang();
+  // Also update mobile menu links
+  document.querySelectorAll('[data-i18n-mob]').forEach(el => {
+    const key = el.getAttribute('data-i18n-mob');
+    if (LANG[currentLang][key]) el.textContent = LANG[currentLang][key];
+  });
+}
+
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const lines = document.querySelectorAll('.hline');
+  menu.classList.toggle('open');
+  const isOpen = menu.classList.contains('open');
+  if (lines[0]) lines[0].style.transform = isOpen ? 'translateY(7px) rotate(45deg)' : '';
+  if (lines[1]) lines[1].style.opacity = isOpen ? '0' : '1';
+  if (lines[2]) { lines[2].style.transform = isOpen ? 'translateY(-7px) rotate(-45deg)' : ''; lines[2].style.width = isOpen ? '22px' : '14px'; }
+}
+
+function applyLang() {
+  const t = LANG[currentLang];
+  const lang = currentLang;
+
+  // data-i18n simple text swaps
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Hero H1
+  const h1 = document.querySelector('.hero-h1');
+  if (h1) h1.innerHTML = t.hero_h1;
+
+  // Hero sub
+  const hsub = document.querySelector('.hero-sub');
+  if (hsub) hsub.textContent = t.hero_sub;
+
+  // Hero buttons
+  const hbtnp = document.querySelector('.hero-btns .btn-p');
+  if (hbtnp) hbtnp.textContent = t.hero_btn_p;
+  const hbtng = document.querySelector('.hero-btns .btn-g');
+  if (hbtng) hbtng.textContent = t.hero_btn_g;
+
+  // Pills
+  const pills = document.querySelectorAll('.hero-pills .pill');
+  if (pills[0]) pills[0].textContent = t.pill_1;
+  if (pills[1]) pills[1].textContent = t.pill_2;
+  if (pills[2]) pills[2].textContent = t.pill_3;
+
+  // Stat boxes — hero right
+  const sboxes = document.querySelectorAll('.stat-box');
+  const sdata = [
+    [t.stat1_n, t.stat1_l, t.stat1_s],
+    [t.stat2_n, t.stat2_l, t.stat2_s],
+    [t.stat3_n, t.stat3_l, t.stat3_s],
+    [t.stat4_n, t.stat4_l, t.stat4_s],
+  ];
+  sboxes.forEach((box, i) => {
+    if (!sdata[i]) return;
+    const n = box.querySelector('.stat-num'); if (n) n.textContent = sdata[i][0];
+    const l = box.querySelector('.stat-label'); if (l) l.textContent = sdata[i][1];
+    const s = box.querySelector('.stat-sub'); if (s) s.textContent = sdata[i][2];
+  });
+
+  // Verticals section header
+  const vsl = document.querySelector('.section-label');
+  if (vsl) vsl.textContent = t.v_choose_label;
+  const vsh = document.querySelector('.section-h2');
+  if (vsh) vsh.innerHTML = t.v_choose_h2;
+  const vsn = document.querySelector('.section-note');
+  if (vsn) vsn.textContent = t.v_choose_note;
+
+  // V-card live/enter badges
+  const liveB = document.querySelector('.v-live');
+  if (liveB) liveB.textContent = t.v_live;
+  document.querySelectorAll('.v-arrow').forEach(a => {
+    const txt = a.childNodes[0];
+    if (txt && txt.nodeType === 3) {
+      const card = a.closest('.v-card');
+      txt.textContent = card && card.getAttribute('data-v') === 'botanica'
+        ? '\n        ' + t.v_enter + '\n        '
+        : '\n        ' + t.v_explore + '\n        ';
+    }
+  });
+
+  // Mission
+  const ml = document.querySelector('.mission-label');
+  if (ml) ml.textContent = t.mission_label;
+  const mh = document.querySelector('.mission-h2');
+  if (mh) mh.innerHTML = t.mission_h2;
+  const mb = document.querySelector('.mission-body');
+  if (mb) mb.textContent = t.mission_body;
+  const mstats = document.querySelectorAll('.m-stat');
+  const mdata = [
+    [t.m1_n, t.m1_l, t.m1_s],
+    [t.m2_n, t.m2_l, t.m2_s],
+    [t.m3_n, t.m3_l, t.m3_s],
+  ];
+  mstats.forEach((ms, i) => {
+    if (!mdata[i]) return;
+    const n = ms.querySelector('.m-num'); if (n) n.textContent = mdata[i][0];
+    const l = ms.querySelector('.m-label'); if (l) l.textContent = mdata[i][1];
+    const s = ms.querySelector('.m-sub'); if (s) s.textContent = mdata[i][2];
+  });
+
+  // Features
+  const fl = document.querySelector('.feat-label');
+  if (fl) fl.textContent = t.feat_label;
+  const fh = document.querySelector('.feat-h2');
+  if (fh) fh.innerHTML = t.feat_h2;
+  const fs = document.querySelector('.feat-sub');
+  if (fs) fs.textContent = t.feat_sub;
+  const fcards = document.querySelectorAll('.feat-card');
+  const fdata = [
+    [t.f1_n, t.f1_sub, t.f1_h3, t.f1_p],
+    [t.f2_n, t.f2_sub, t.f2_h3, t.f2_p],
+    [t.f3_n, t.f3_sub, t.f3_h3, t.f3_p],
+    [t.f4_n, t.f4_sub, t.f4_h3, t.f4_p],
+  ];
+  fcards.forEach((fc, i) => {
+    if (!fdata[i]) return;
+    const n = fc.querySelector('.feat-n'); if (n) n.textContent = fdata[i][0];
+    const s = fc.querySelector('.feat-n-label'); if (s) s.textContent = fdata[i][1];
+    const h = fc.querySelector('h3'); if (h) h.textContent = fdata[i][2];
+    const p = fc.querySelector('p'); if (p) p.textContent = fdata[i][3];
+  });
+
+  // Demo section (hub)
+  const dsl = document.querySelector('#demo .feat-label, #features .feat-label + .feat-h2');
+  const demoSection = document.getElementById('demo');
+  if (demoSection) {
+    const dl = demoSection.querySelector('.feat-label'); if (dl) dl.textContent = t.demo_label;
+    const dh = demoSection.querySelector('.feat-h2');    if (dh) dh.innerHTML = t.demo_h2;
+    const ds = demoSection.querySelector('.feat-sub');   if (ds) ds.textContent = t.demo_sub;
+    // Tabs
+    const tabs = demoSection.querySelectorAll('.dtab');
+    const stepKeys = [t.step1, t.step2, t.step3, t.step4];
+    tabs.forEach((tab, i) => {
+      const sn = tab.querySelector('.step-n'); // preserve step-n span
+      const stepN = sn ? sn.textContent : '';
+      tab.textContent = stepKeys[i];
+      if (sn) { const newSn = document.createElement('span'); newSn.className='step-n'; newSn.textContent = 'Step ' + (i+1); tab.prepend(newSn); }
+    });
+    const di = document.querySelector('#dp1 > p');
+    if (di) di.textContent = t.demo_intro;
+    const bc = document.querySelector('#dp1 button');
+    if (bc) bc.innerHTML = t.btn_connect;
+    const ba = document.getElementById('btnAI');
+    if (ba) ba.innerHTML = t.btn_ai;
+    const br = document.getElementById('btnReport');
+    if (br) br.innerHTML = t.btn_report;
+  }
+
+  // CTA section
+  const ctaSection = document.getElementById('contact');
+  if (ctaSection) {
+    const cl = ctaSection.querySelector('.section-label, [data-i18n="cta_label"]'); 
+    const allLabels = ctaSection.querySelectorAll('.feat-label');
+    allLabels.forEach(l => l.textContent = t.cta_label);
+    const ch = ctaSection.querySelector('.cta-h2'); if (ch) ch.innerHTML = t.cta_h2;
+    const cb = ctaSection.querySelector('.cta-body'); if (cb) cb.textContent = t.cta_body;
+    const cbt = ctaSection.querySelector('.btn-p'); if (cbt) cbt.textContent = t.cta_btn;
+    const cn = ctaSection.querySelector('.cta-note'); if (cn) cn.textContent = t.cta_note;
+  }
+
+  // Footer copy
+  const fc = document.querySelector('.foot-copy');
+  if (fc) fc.textContent = t.foot_copy;
+
+  // ── Botanica Panel ──
+  const panel = document.getElementById('botanica-panel');
+  if (panel) {
+    // Eyebrow
+    const pe = panel.querySelector('span[style*="letter-spacing:0.22em"]');
+    if (pe) pe.textContent = t.b_eyebrow;
+    // H1
+    const ph = panel.querySelector('h1');
+    if (ph) ph.innerHTML = t.b_h1;
+    // Lead
+    const pl = panel.querySelector('p[style*="font-size:21px"]');
+    if (pl) pl.textContent = t.b_lead;
+    // Buttons
+    const pbtns = panel.querySelectorAll('a[href="mailto:hello@synclair.bio"]');
+    pbtns.forEach(b => { if (b.textContent.includes('Pilot') || b.textContent.includes('Zugang') || b.textContent.includes('anfragen')) b.textContent = t.b_btn_p; });
+    const pdemo = panel.querySelector('a[href="#b-demo"]');
+    if (pdemo) pdemo.textContent = t.b_btn_g;
+    // Pills
+    const ppills = panel.querySelectorAll('span[style*="display:flex;align-items:center;gap:0.45rem"]');
+    if (ppills[0]) ppills[0].innerHTML = '<span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>' + t.b_pill1;
+    if (ppills[1]) ppills[1].innerHTML = '<span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>' + t.b_pill2;
+    if (ppills[2]) ppills[2].innerHTML = '<span style="width:6px;height:6px;border-radius:50%;background:#2a8a48;flex-shrink:0;display:inline-block;"></span>' + t.b_pill3;
+    // Demo section
+    const bdl = panel.querySelector('span[style*="letter-spacing:0.22em;color:#2a8a48"]');
+    if (bdl) bdl.textContent = t.b_demo_label;
+    const bdh = panel.querySelector('h2');
+    if (bdh) bdh.innerHTML = t.b_demo_h2;
+    const bds = panel.querySelectorAll('p[style*="font-size:19px"]');
+    if (bds[0]) bds[0].textContent = t.b_demo_sub;
+    // Tabs
+    const btabs = panel.querySelectorAll('.b-tab');
+    const bsteps = [t.step1, t.step2, t.step3, t.step4];
+    const bstepNums = lang === 'de'
+      ? ['Schritt 1','Schritt 2','Schritt 3','Schritt 4']
+      : ['Step 1','Step 2','Step 3','Step 4'];
+    btabs.forEach((tab, i) => {
+      tab.innerHTML = '<span style="display:block;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:inherit;opacity:0.7;margin-bottom:3px;">' + bstepNums[i] + '</span>' + bsteps[i];
+    });
+    // Botanica demo connect button
+    const bconn = panel.querySelector('#bp1 button');
+    if (bconn) bconn.textContent = t.btn_connect;
+    const bai = document.getElementById('b-btnAI');
+    if (bai) bai.textContent = t.btn_ai;
+    const brpt = document.getElementById('b-btnReport');
+    if (brpt) brpt.textContent = t.btn_report;
+  }
+}
+</script>
+<!-- COMING SOON MODAL -->
+<div id="coming-soon-overlay" onclick="hideComingSoon()" style="
+  display:none; position:fixed; inset:0; z-index:900;
+  background:rgba(17,26,18,0.5); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center;
+">
+  <div onclick="event.stopPropagation()" style="
+    background:#fff; border-radius:20px; padding:3rem 2.5rem;
+    max-width:440px; width:90%; text-align:center;
+    box-shadow:0 32px 80px rgba(17,26,18,0.2);
+    animation: modalIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  ">
+    <div id="cs-icon" style="font-size:3rem; margin-bottom:1.2rem;">🌊</div>
+    <h2 id="cs-title" style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#111a12;margin-bottom:0.8rem;line-height:1.1;">Synclair Marina</h2>
+    <p id="cs-sub" style="font-size:17px;font-weight:300;color:#6a7e6c;line-height:1.65;margin-bottom:2rem;">We're building Marina now. Ocean biodiversity intelligence for marine institutes and aquaria. Launching soon.</p>
+    <a href="mailto:hello@synclair.bio" style="display:inline-block;background:#111a12;color:#fff;padding:0.9rem 2rem;border-radius:999px;font-size:17px;font-weight:500;text-decoration:none;margin-bottom:1rem;">Join the Waitlist</a>
+    <br>
+    <button onclick="hideComingSoon()" style="background:none;border:none;cursor:pointer;font-size:15px;color:#6a7e6c;margin-top:0.5rem;font-family:'Jost',sans-serif;">Close</button>
+  </div>
+</div>
+
+<style>
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(20px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+</style>
+
+<script>
+const CS_DATA = {
+  Marina: {
+    icon: '🌊',
+    title: 'Synclair Marina',
+    sub: 'Ocean biodiversity intelligence for marine institutes and aquaria. Blue carbon scoring, OBIS-integrated species intelligence, automated grant reporting. Launching soon.',
+  },
+  Natura: {
+    icon: '🪲',
+    title: 'Synclair Natura',
+    sub: 'Natural history intelligence for museums, entomology collections and palaeontology archives. Specimen intelligence, GBIF-linked scoring, grant reporting. Launching soon.',
+  },
+  Terra: {
+    icon: '🌱',
+    title: 'Synclair Terra',
+    sub: 'Germplasm intelligence for gene banks and seed libraries. Seed viability tracking, FAO/GRIN-compatible accession intelligence, grant reporting. Launching soon.',
+  },
+};
+
+function showComingSoon(name) {
+  const d = CS_DATA[name];
+  document.getElementById('cs-icon').textContent = d.icon;
+  document.getElementById('cs-title').textContent = d.title;
+  document.getElementById('cs-sub').textContent = d.sub;
+  const overlay = document.getElementById('coming-soon-overlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function hideComingSoon() {
+  document.getElementById('coming-soon-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { hideComingSoon(); closeBotanica(); }
+});
+</script>
+
+</body>
+</html>
