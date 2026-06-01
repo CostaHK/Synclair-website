@@ -7,13 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-lLtNFCCDf0FZuQi-F-Z6i.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
-
+<script defer data-domain="synclair.bio" src="https://plausible.io/js/pa-JRc2uNA7DMYh_tRs0gik8.js"></script>
 
 <style>
 /* ═══════════════════════════════════════════════
@@ -844,8 +838,30 @@ footer {
   #coming-soon-overlay > div { padding: 2rem 1.5rem !important; }
   #cs-title { font-size: 28px !important; }
 
-  /* Botanica panel hero — stack */
-  #botanica-panel .b-hero-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  /* Botanica panel — report KPIs and columns */
+  #botanica-panel .rkpis,
+  #botanica-panel div[style*="grid-template-columns:repeat(4,1fr)"],
+  #botanica-panel div[style*="grid-template-columns: repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+  #botanica-panel .rkn,
+  #botanica-panel div[style*="font-size:40px"] { font-size: 28px !important; }
+  #botanica-panel .rcols,
+  #botanica-panel div[style*="grid-template-columns:1fr 1fr;gap:2rem"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  #botanica-panel .rin,
+  #botanica-panel div[style*="font-size:64px"] { font-size: 36px !important; }
+  #botanica-panel .rw,
+  #botanica-panel div[style*="padding:2.5rem"] { padding: 1.25rem !important; }
+
+  /* Botanica panel demo tabs on mobile */
+  #botanica-panel .b-tab { font-size: 13px !important; padding: 0.8rem 0.4rem !important; }
+  #botanica-panel div[style*="grid-template-columns:repeat(4,1fr);gap:1rem"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
 }
 </style>
 </head>
