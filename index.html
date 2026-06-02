@@ -862,6 +862,13 @@ footer {
   #botanica-panel div[style*="grid-template-columns:repeat(4,1fr);gap:1rem"] {
     grid-template-columns: 1fr 1fr !important;
   }
+
+  /* Demo import — 3 stat cards stay in one row but compact */
+  .demo-stats3 { grid-template-columns: repeat(3,1fr) !important; gap: 0.5rem !important; }
+  .demo-stats3 > div { padding: 0.9rem 0.4rem !important; }
+  .demo-stats3 > div > div:first-child,
+  #botanica-panel .demo-stats3 > div > div:first-child { font-size: 22px !important; }
+  .demo-stats3 > div > div:last-child { font-size: 12px !important; line-height: 1.25 !important; margin-top: 0.25rem !important; }
 }
 </style>
 </head>
@@ -1223,7 +1230,7 @@ footer {
         <div style="background:rgba(17,26,18,0.08);border-radius:999px;height:8px;margin-bottom:2rem;overflow:hidden;">
           <div id="pBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,var(--Gm),#2de896);width:0%;transition:width 0.4s ease;"></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
+        <div class="demo-stats3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
           <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.5rem;">
             <div id="cSpec" style="font-family:var(--FD);font-size:40px;color:var(--Gm);line-height:1;">0</div>
             <div style="font-size:15px;color:var(--ink3);margin-top:0.3rem;">Specimens found</div>
@@ -1585,7 +1592,7 @@ function startAnalysis() {
         <div style="background:rgba(17,26,18,0.08);border-radius:999px;height:8px;margin-bottom:2rem;overflow:hidden;">
           <div id="b-pbar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#2a8a48,#2de896);width:0%;transition:width 0.4s ease;"></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
+        <div class="demo-stats3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;text-align:center;">
           <div style="background:#fff;border:1px solid rgba(17,26,18,0.1);border-radius:10px;padding:1.5rem;">
             <div id="b-spec" style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#2a8a48;line-height:1;">0</div>
             <div style="font-size:14px;color:#6a7e6c;margin-top:0.3rem;">Specimens found</div>
