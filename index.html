@@ -1357,6 +1357,7 @@ footer {
       <li><a href="#mission">Mission</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="mailto:hello@synclair.bio" data-i18n="footer_contact">Contact</a></li>
+      <li><a href="#" onclick="showImpressum(); return false;">Impressum</a></li>
     </ul>
     <span class="foot-copy">© 2026 Synclair Holding GmbH · Munich</span>
   </div>
@@ -2235,6 +2236,69 @@ function hideComingSoon() {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { hideComingSoon(); closeBotanica(); }
+});
+</script>
+
+<div id="impressum-overlay" onclick="hideImpressum()" style="
+  display:none; position:fixed; inset:0; z-index:950;
+  background:rgba(17,26,18,0.5); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:1.5rem;
+">
+  <div onclick="event.stopPropagation()" style="
+    background:#fff; border-radius:20px; padding:2.5rem 2.25rem;
+    max-width:560px; width:100%; max-height:85vh; overflow-y:auto;
+    text-align:left; box-shadow:0 32px 80px rgba(17,26,18,0.2);
+    animation: modalIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  ">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.2rem;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#111a12;line-height:1.1;">Impressum</h2>
+      <button onclick="hideImpressum()" aria-label="Schließen" style="background:none;border:none;cursor:pointer;font-size:1.7rem;line-height:1;color:#6a7e6c;padding:0 0 0 1rem;">&times;</button>
+    </div>
+    <div style="font-family:'Jost',sans-serif;font-weight:300;font-size:15px;line-height:1.7;color:#2c3e2e;">
+      <p style="margin-bottom:1.2rem;color:#6a7e6c;">Angaben gemäß § 5 DDG</p>
+
+      <p style="font-weight:500;color:#111a12;margin-bottom:0.1rem;">Synclair GmbH i. G. (in Gründung)</p>
+      <p>Jeschkenstraße 10<br>82538 Geretsried<br>Deutschland</p>
+
+      <p style="margin-top:0.9rem;color:#6a7e6c;">Die Gesellschaft befindet sich in Gründung. Die Eintragung in das Handelsregister beim Amtsgericht München ist beantragt; die HRB-Nummer wird nach erfolgter Eintragung ergänzt.</p>
+
+      <p style="margin-top:1.2rem;"><strong style="font-weight:500;">Vertreten durch</strong><br>Geschäftsführer: Constantin Stahlknecht</p>
+
+      <p style="margin-top:1.2rem;"><strong style="font-weight:500;">Kontakt</strong><br>
+      E-Mail: <a href="mailto:hello@synclair.bio" style="color:#2a8a48;">hello@synclair.bio</a><br>
+      Telefon: +49 89 14335630</p>
+
+      <p style="margin-top:1.2rem;"><strong style="font-weight:500;">Umsatzsteuer-Identifikationsnummer</strong> (§ 27a UStG)<br>
+      Wird nach Eintragung der Gesellschaft ergänzt.</p>
+
+      <p style="margin-top:1.2rem;"><strong style="font-weight:500;">Verantwortlich für den Inhalt</strong> nach § 18 Abs. 2 MStV<br>
+      Constantin Stahlknecht, Anschrift wie oben</p>
+
+      <hr style="border:none;border-top:1px solid rgba(17,26,18,0.1);margin:1.6rem 0;">
+
+      <p style="font-weight:500;color:#111a12;margin-bottom:0.3rem;">Streitschlichtung</p>
+      <p style="margin-bottom:1.3rem;color:#6a7e6c;">Die EU-Plattform zur Online-Streitbeilegung (OS) wurde zum 20. Juli 2025 eingestellt. Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <p style="font-weight:500;color:#111a12;margin-bottom:0.3rem;">Haftung für Inhalte &amp; Links</p>
+      <p style="margin-bottom:1.3rem;color:#6a7e6c;">Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich, nach §§ 8–10 DDG jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Für die Inhalte verlinkter externer Seiten ist stets deren jeweiliger Anbieter oder Betreiber verantwortlich; zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar.</p>
+
+      <p style="font-weight:500;color:#111a12;margin-bottom:0.3rem;">Urheberrecht</p>
+      <p style="color:#6a7e6c;">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function showImpressum() {
+  document.getElementById('impressum-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function hideImpressum() {
+  document.getElementById('impressum-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') hideImpressum();
 });
 </script>
 
